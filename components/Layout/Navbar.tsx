@@ -1,10 +1,19 @@
-import { ReactNode } from "react";
+import { ChangeEvent } from "react";
 
 export default function Layout() {
+  const toggleTheme = (event: ChangeEvent<HTMLInputElement>) => {
+    const checked = event.target.checked;
+    if (checked) {
+      document.body.setAttribute("data-theme", "dark");
+    } else {
+      document.body.setAttribute("data-theme", "light");
+    }
+  };
+
   return (
     <nav className="navbar">
       <div className="container">
-        <h2 className="logo">Social</h2>
+        <h2 className="logo">Juntos_</h2>
         <label className="search-bar">
           <i className="uil uil-search"></i>
           <input
@@ -12,12 +21,13 @@ export default function Layout() {
             type="search"
             name="search"
             id="search"
-            placeholder="Search for creators and projects"
+            placeholder="Busca por creadores, proyectos o temas"
           />
         </label>
         <div className="create">
           <label className="theme-btn">
             <input
+              onChange={toggleTheme}
               type="checkbox"
               name="theme"
               id="theme-checkbox"
