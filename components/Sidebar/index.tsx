@@ -25,7 +25,7 @@ export default function Sidebar() {
           <span className="menu-item-icon">
             <i className="uil uil-compass"></i>
           </span>
-          <h3 className="menu-item-text">Explore</h3>
+          <h3 className="menu-item-text">Explorar</h3>
         </a>
         <a className="menu-item" id="notifications">
           <span className="menu-item-icon">
@@ -33,7 +33,7 @@ export default function Sidebar() {
               <small className="notification-count">6</small>
             </i>
           </span>
-          <h3 className="menu-item-text">Notifications</h3>
+          <h3 className="menu-item-text">Notificaciones</h3>
           <ul className="menu-item-popup">
             <li className="popup-item">
               <picture className="profile-photo">
@@ -78,26 +78,26 @@ export default function Sidebar() {
               <small className="notification-count">6</small>
             </i>
           </span>
-          <h3 className="menu-item-text">Message</h3>
+          <h3 className="menu-item-text">Mensajes</h3>
         </a>
         <a className="menu-item">
           <span className="menu-item-icon">
             <i className="uil uil-bookmark"></i>
           </span>
-          <h3 className="menu-item-text">Bookmarks</h3>
+          <h3 className="menu-item-text">Marcadores</h3>
         </a>
         <a className="menu-item">
           <span className="menu-item-icon">
             <i className="uil uil-chart-line"></i>
           </span>
-          <h3 className="menu-item-text">Analytics</h3>
+          <h3 className="menu-item-text">Estadisticas</h3>
         </a>
 
         <a className="menu-item">
           <span className="menu-item-icon">
             <i className="uil uil-setting"></i>
           </span>
-          <h3 className="menu-item-text">Setting</h3>
+          <h3 className="menu-item-text">Configuración</h3>
         </a>
       </aside>
     </>

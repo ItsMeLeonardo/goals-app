@@ -226,7 +226,7 @@ main .container {
 .sidebar i {
   font-size: 1.4rem;
   color: var(--color-gray);
-  margin-left: 2rem;
+  margin-left: 1rem;
   position: relative;
 }
 .notification-count {
