@@ -61,7 +61,7 @@ body[data-theme="dark"] {
   color: var(--color-white);
 }
 :focus {
-  outline: 2px solid var(--color-gray);
+  outline: 2px solid var(--color-primary);
   outline-offset: 0.25rem;
   border-radius: 0.25rem;
 }
