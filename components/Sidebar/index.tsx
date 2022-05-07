@@ -1,4 +1,38 @@
+import NextLink from "next/link";
+import { useRouter } from "next/router";
+
+const linksList = [
+  {
+    href: "/",
+    label: "Home",
+    icon: <i className="uil uil-home"></i>,
+  },
+  {
+    href: "/explore",
+    label: "Explorar",
+    icon: <i className="uil uil-compass"></i>,
+  },
+  {
+    href: "/saved",
+    label: "Mi lista",
+    icon: <i className="uil uil-bookmark"></i>,
+  },
+  {
+    href: "/stats",
+    label: "Estadísticas",
+    icon: <i className="uil uil-chart-line"></i>,
+  },
+  {
+    href: "/settings",
+    label: "Configuración",
+    icon: <i className="uil uil-setting"></i>,
+  },
+];
+
 export default function Sidebar() {
+  const router = useRouter();
+  const { pathname } = router;
+
   return (
     <>
       <a href="" className="profile-link">
@@ -15,91 +49,70 @@ export default function Sidebar() {
       </a>
 
       <aside className="sidebar">
-        <a className="menu-item active">
-          <span className="menu-item-icon">
-            <i className="uil uil-home"></i>
-          </span>
-          <h3 className="menu-item-text">Home</h3>
-        </a>
-        <a className="menu-item">
-          <span className="menu-item-icon">
-            <i className="uil uil-compass"></i>
-          </span>
-          <h3 className="menu-item-text">Explorar</h3>
-        </a>
-        <a className="menu-item" id="notifications">
-          <span className="menu-item-icon">
-            <i className="uil uil-bell">
-              <small className="notification-count">6</small>
-            </i>
-          </span>
-          <h3 className="menu-item-text">Notificaciones</h3>
-          <ul className="menu-item-popup">
-            <li className="popup-item">
-              <picture className="profile-photo">
-                <img src="./images/profile-2.jpg" />
-              </picture>
-              <div className="popup-item-body">
-                <p>
-                  <strong>John Doe</strong> Accepted your friend request
-                </p>
-                <small className="text-muted">2 Days Ago</small>
-              </div>
-            </li>
-            <li className="popup-item">
-              <picture className="profile-photo">
-                <img src="./images/profile-3.jpg" />
-              </picture>
-              <div className="popup-item-body">
-                <p>
-                  <strong>Anna Doe</strong>
-                  Commented your post
-                </p>
-                <small className="text-muted">2 Days Ago</small>
-              </div>
-            </li>
-            <li className="popup-item">
-              <picture className="profile-photo">
-                <img src="./images/profile-4.jpg" />
-              </picture>
-              <div className="popup-item-body">
-                <p>
-                  <strong>John Doe</strong>
-                  Liked your post
-                </p>
-                <small className="text-muted">2 Days Ago</small>
-              </div>
-            </li>
-          </ul>
-        </a>
-        <a className="menu-item" id="message-notification">
-          <span className="menu-item-icon">
-            <i className="uil uil-envelope-alt">
-              <small className="notification-count">6</small>
-            </i>
-          </span>
-          <h3 className="menu-item-text">Mensajes</h3>
-        </a>
-        <a className="menu-item">
-          <span className="menu-item-icon">
-            <i className="uil uil-bookmark"></i>
-          </span>
-          <h3 className="menu-item-text">Marcadores</h3>
-        </a>
-        <a className="menu-item">
-          <span className="menu-item-icon">
-            <i className="uil uil-chart-line"></i>
-          </span>
-          <h3 className="menu-item-text">Estadisticas</h3>
-        </a>
-
-        <a className="menu-item">
-          <span className="menu-item-icon">
-            <i className="uil uil-setting"></i>
-          </span>
-          <h3 className="menu-item-text">Configuración</h3>
-        </a>
+        {linksList.map(({ href, icon, label }) => (
+          <NextLink href={href} key={href}>
+            <a className={`menu-item ${href === pathname ? "active" : ""}`}>
+              {icon}
+              <span className="menu-item-text">{label}</span>
+            </a>
+          </NextLink>
+        ))}
       </aside>
     </>
   );
 }
+/*
+<a className="menu-item" id="notifications">
+  <span className="menu-item-icon">
+    <i className="uil uil-bell">
+      <small className="notification-count">6</small>
+    </i>
+  </span>
+  <h3 className="menu-item-text">Notificaciones</h3>
+  <ul className="menu-item-popup">
+    <li className="popup-item">
+      <picture className="profile-photo">
+        <img src="./images/profile-2.jpg" />
+      </picture>
+      <div className="popup-item-body">
+        <p>
+          <strong>John Doe</strong> Accepted your friend request
+        </p>
+        <small className="text-muted">2 Days Ago</small>
+      </div>
+    </li>
+    <li className="popup-item">
+      <picture className="profile-photo">
+        <img src="./images/profile-3.jpg" />
+      </picture>
+      <div className="popup-item-body">
+        <p>
+          <strong>Anna Doe</strong>
+          Commented your post
+        </p>
+        <small className="text-muted">2 Days Ago</small>
+      </div>
+    </li>
+    <li className="popup-item">
+      <picture className="profile-photo">
+        <img src="./images/profile-4.jpg" />
+      </picture>
+      <div className="popup-item-body">
+        <p>
+          <strong>John Doe</strong>
+          Liked your post
+        </p>
+        <small className="text-muted">2 Days Ago</small>
+      </div>
+    </li>
+  </ul>
+</a>
+<a className="menu-item" id="message-notification">
+  <span className="menu-item-icon">
+    <i className="uil uil-envelope-alt">
+      <small className="notification-count">6</small>
+    </i>
+  </span>
+  <h3 className="menu-item-text">Mensajes</h3>
+</a>
+*/
