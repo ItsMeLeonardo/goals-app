@@ -404,10 +404,22 @@ main .container {
   gap: 1rem;
 }
 
+.feed-body {
+  cursor: pointer;
+  height: 300px;
+}
+.feed-body img {
+  transition: transform 0.15s ease-in;
+}
+.feed-body:hover img {
+  transform: scale(1.05) rotate(0.5deg);
+}
+
 .feed-photo {
   border-radius: var(--card-radius);
   overflow: hidden;
   margin: 0.7em 0;
+  height: 100%;
 }
 
 .feed-interactions {
@@ -416,6 +428,11 @@ main .container {
   align-items: center;
   font-size: 1.4rem;
   margin: 0.6rem;
+  margin-bottom: 0;
+}
+.feed-interactions-buttons {
+  display: flex;
+  gap: 0.5rem;
 }
 .feed-interaction-button {
   cursor: pointer;
@@ -428,6 +445,30 @@ main .container {
 .feed-footer {
   width: 100%;
   position: relative;
+}
+.feed-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  transition: color 0.3s ease-in;
+  cursor: pointer;
+}
+.feed-title:hover {
+  color: var(--color-primary);
+}
+.feed-tag-list {
+  margin-top: 0.5em;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.feed-tag {
+  cursor: pointer;
+}
+.feed-tag-text {
+  font-size: 0.8rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 1rem;
+  background: var(--color-primary);
 }
 .feed-likeBy {
   display: flex;
@@ -572,6 +613,10 @@ main .container {
 @media screen and (max-width: 1200px) {
   .container {
     width: 96%;
+  }
+
+  .sidebar i {
+    margin-left: 2rem;
   }
 
   main .container {
