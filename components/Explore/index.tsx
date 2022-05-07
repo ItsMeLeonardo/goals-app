@@ -48,6 +48,9 @@ export default function Explore() {
         </ul>
       </form>
 
+      <h4 className="subtitle-sm">
+        Resultados para <span className="text-primary">Web</span>
+      </h4>
       <ul className={styles.result_list}>
         <li className={styles.result_item}>
           <aside className={styles.result_body}>

@@ -37,7 +37,6 @@
 
 /* ========== search results ========== */
 .result_list {
-  margin-top: 1rem;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -54,6 +53,7 @@
   background: var(--color-white);
   height: 210px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .result_thumbnail {

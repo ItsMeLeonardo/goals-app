@@ -106,6 +106,13 @@ picture {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
 }
+.subtitle-sm {
+  font-size: 1.125rem;
+  margin: 1rem 0 0.5rem 0;
+}
+.text-primary {
+  color: var(--color-primary);
+}
 
 /* ========== theme ========== */
 
@@ -466,12 +473,18 @@ main .container {
 .feed-tag {
   cursor: pointer;
 }
+
 .feed-tag-text {
   font-size: 0.8rem;
   padding: 0.125rem 0.5rem;
   border-radius: 1rem;
   color: white;
   background: var(--color-primary);
+  transition: color 0.3s ease-in, background 0.3s ease;
+}
+.feed-tag-text:hover {
+  background: var(--color-white);
+  color: var(--color-primary);
 }
 .feed-likeBy {
   display: flex;
