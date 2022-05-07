@@ -3,7 +3,7 @@ export default function RightContent() {
     <>
       <aside className="messages-container">
         <header className="messages-head">
-          <h3 className="message-title">Messages</h3>
+          <h3 className="message-title">Categorías</h3>
         </header>
         <label className="messages-search-bar search-bar">
           <i className="uil uil-search"></i>
@@ -11,7 +11,7 @@ export default function RightContent() {
             type="search"
             name="search"
             id="search-messages"
-            placeholder="Search"
+            placeholder="Descubre categorías"
           />
         </label>
         <div className="messages-category">
@@ -34,7 +34,6 @@ export default function RightContent() {
           </li>
         </ul>
       </aside>
-
       <div className="friend-request-container">
         <h4 className="friends-request-title">Request</h4>
 

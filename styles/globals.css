@@ -56,6 +56,32 @@ body[data-theme="dark"] {
   --color-shadow: var(--color-black);
 }
 /* ========== General styles ========== */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+:focus {
+  outline: 2px solid var(--color-gray);
+  outline-offset: 0.25rem;
+  border-radius: 0.25rem;
+}
+/* width */
+::-webkit-scrollbar {
+  --size: 0.35rem;
+  width: var(--size);
+  height: var(--size);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 1rem;
+  background: var(--color-primary);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray);
+}
 img {
   display: block;
   width: 100%;

@@ -10,10 +10,7 @@
   width: 100%;
   font-weight: 500;
   margin: 0.75rem 0;
-}
-.search:focus {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 0.25rem;
+  color: var(--color-dark);
 }
 
 .category_list {
