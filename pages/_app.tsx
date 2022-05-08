@@ -2,13 +2,37 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 
 //components
-import Layout from "components/Layout";
+import MainLayout from "components/Layout";
+import RequireAuth from "components/RequireAuth";
+import UserLayout from "components/Layout/UserLayout";
 
-function MyApp({ Component, pageProps }: AppProps) {
+//context
+import { AuthProvider } from "context/AuthContext";
+
+//types
+type RequireAuthComponent = {
+  requireAuth?: boolean;
+} & AppProps["Component"];
+
+type Props = {
+  Component: RequireAuthComponent;
+} & AppProps;
+
+function MyApp({ Component, pageProps }: Props) {
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <AuthProvider>
+      {Component.requireAuth ? (
+        <RequireAuth>
+          <UserLayout>
+            <Component {...pageProps} />
+          </UserLayout>
+        </RequireAuth>
+      ) : (
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
+      )}
+    </AuthProvider>
   );
 }
 
