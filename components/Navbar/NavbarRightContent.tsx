@@ -1,5 +1,6 @@
 import { ChangeEvent } from "react";
 import NextLink from "next/link";
+import { signOut } from "next-auth/react";
 
 //utils
 import { useUser } from "hooks/useUser";
@@ -31,11 +32,11 @@ export default function NavbarRightContent() {
         <i className="uil uil-moon dark-theme-icon"></i>
       </label>
       {user ? (
-        <picture className="profile-photo">
-          <img
-            src="https://images.unsplash.com/photo-1651634099348-e4c38cfaa6d5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"
-            alt="profile 1"
-          />
+        <picture
+          className="profile-photo"
+          onClick={() => signOut({ redirect: true, callbackUrl: "/login" })}
+        >
+          <img src={user.user?.image || ""} alt={user.user?.name || ""} />
         </picture>
       ) : (
         <NextLink href="/login">

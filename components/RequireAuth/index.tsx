@@ -9,9 +9,9 @@ interface Props {
 }
 
 export default function RequireAuthLayout({ children }: Props) {
-  const { user } = useAuth();
+  const { status } = useAuth();
 
-  if (!user) {
+  if (status === "loading" || status === "unauthenticated") {
     return <div className="login">Login ...</div>;
   }
 

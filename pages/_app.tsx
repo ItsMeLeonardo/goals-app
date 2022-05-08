@@ -1,5 +1,6 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
+import { SessionProvider } from "next-auth/react";
 
 //components
 import MainLayout from "components/Layout";
@@ -18,9 +19,9 @@ type Props = {
   Component: RequireAuthComponent;
 } & AppProps;
 
-function MyApp({ Component, pageProps }: Props) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: Props) {
   return (
-    <AuthProvider>
+    <SessionProvider session={session}>
       {Component.requireAuth ? (
         <RequireAuth>
           <UserLayout>
@@ -32,7 +33,7 @@ function MyApp({ Component, pageProps }: Props) {
           <Component {...pageProps} />
         </MainLayout>
       )}
-    </AuthProvider>
+    </SessionProvider>
   );
 }
 

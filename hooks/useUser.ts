@@ -1,8 +1,11 @@
-import { useContext } from "react";
-
-import { AuthContext } from "context/AuthContext";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export const useUser = () => {
-  const auth = useContext(AuthContext);
-  return auth;
+  const { data } = useSession();
+
+  return {
+    user: data,
+    signIn,
+    signOut,
+  };
 };

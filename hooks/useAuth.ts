@@ -1,17 +1,15 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import Router from "next/router";
-
-import { AuthContext } from "context/AuthContext";
+import { useSession } from "next-auth/react";
 
 export const useAuth = () => {
-  const auth = useContext(AuthContext);
-  const { user } = auth;
+  const { status } = useSession();
 
   useEffect(() => {
-    if (!user) {
+    if (status === "unauthenticated") {
       Router.push("/login");
     }
-  }, [user]);
+  }, [status]);
 
-  return auth;
+  return { status };
 };

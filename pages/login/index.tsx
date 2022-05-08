@@ -1,4 +1,14 @@
+import { useUser } from "hooks/useUser";
+
+type AuthProviders = "google" | "github"; //| "facebook" | "twitter";
+
 export default function Login() {
+  const { signIn } = useUser();
+
+  const handleLogin = (provider: AuthProviders) => {
+    signIn(provider, { callbackUrl: "/home" });
+  };
+
   return (
     <>
       <section className="page_content">
@@ -8,11 +18,17 @@ export default function Login() {
             <span className="logo"> Juntos_</span>
           </h1>
 
-          <button className="btn github_button">
+          <button
+            className="btn github_button"
+            onClick={() => handleLogin("github")}
+          >
             <i className="uil uil-github-alt"></i>
             <span>Github</span>
           </button>
-          <button className="btn google_button">
+          <button
+            className="btn google_button"
+            onClick={() => handleLogin("google")}
+          >
             <i className="uil uil-google"></i>
             <span>Google</span>
           </button>
@@ -53,7 +69,7 @@ export default function Login() {
           gap: 0.5rem;
           justify-content: center;
           align-items: center;
-          color: var(--color-white);
+          color: white;
         }
         .google_button i,
         .github_button i {
