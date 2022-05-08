@@ -7,3 +7,5 @@ export default function Explore() {
     </>
   );
 }
+
+Explore.requireAuth = true;
