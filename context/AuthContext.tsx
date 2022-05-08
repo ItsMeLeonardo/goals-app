@@ -31,7 +31,7 @@ const defaultUser: User = {
 };
 
 export function AuthProvider({ children }: Props) {
-  const [user, setUser] = useState<User | null>(defaultUser);
+  const [user, setUser] = useState<User | null>(null);
 
   const login = (user: User, cb: VoidFunction) => {
     setUser(user);

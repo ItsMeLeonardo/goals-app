@@ -5,7 +5,7 @@ interface Props {
 }
 
 //components
-import Navbar from "components/Layout/Navbar";
+import Navbar from "components/Navbar";
 
 export default function Layout({ children }: Props) {
   return (

@@ -92,6 +92,9 @@ img {
 picture {
   display: block;
 }
+a:visited {
+  color: initial;
+}
 
 .container {
   width: 90%;
