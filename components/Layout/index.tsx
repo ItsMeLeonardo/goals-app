@@ -6,26 +6,12 @@ interface Props {
 
 //components
 import Navbar from "components/Layout/Navbar";
-import Sidebar from "components/Sidebar";
-import RightContent from "./RightContent";
 
 export default function Layout({ children }: Props) {
   return (
     <section>
       <Navbar />
-      <main>
-        <div className="container">
-          <section className="left">
-            <Sidebar />
-          </section>
-
-          <section className="middle">{children}</section>
-
-          <section className="right">
-            <RightContent />
-          </section>
-        </div>
-      </main>
+      <main className="container">{children}</main>
     </section>
   );
 }
