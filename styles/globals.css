@@ -214,9 +214,13 @@ picture {
 main {
   position: relative;
   top: 5.4rem;
+  width: 90%;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 main .container {
+  width: 100%;
   display: grid;
   grid-template-columns: 18% auto 22%;
   column-gap: 1rem;
