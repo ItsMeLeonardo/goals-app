@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 const linksList = [
   {
-    href: "/",
+    href: "/home",
     label: "Home",
     icon: <i className="uil uil-home"></i>,
   },
