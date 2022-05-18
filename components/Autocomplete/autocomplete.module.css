@@ -1,0 +1,69 @@
+.check_container {
+  position: relative;
+}
+.list {
+  position: absolute;
+  z-index: 10;
+  top: 3.5rem;
+  width: 100%;
+  left: 0;
+  padding: 0.5rem;
+  border-radius: calc(var(--card-radius) / 2);
+  background: var(--color-white);
+  box-shadow: 0 0.75rem 2rem rgb(107 76 230 / 16%);
+}
+.item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: calc(var(--card-radius) / 2);
+  color: var(--color-primary);
+}
+.item:hover {
+  background: var(--color-light);
+}
+.icon_check {
+  --size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 0.35rem;
+  transform: rotate(45deg);
+  border: 2px solid var(--color-light);
+}
+.icon_check i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  transform: rotate(-45deg);
+}
+
+.icon_check_active {
+  border: 2px solid var(--color-primary);
+  background: var(--color-primary);
+  color: white;
+}
+.output_list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  position: absolute;
+  top: 3.5rem;
+  width: 100%;
+  left: 0;
+}
+.output_item {
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: calc(var(--card-radius) / 2);
+  background: var(--color-light);
+  color: var(--color-primary);
+}
