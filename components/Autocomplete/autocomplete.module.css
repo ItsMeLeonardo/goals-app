@@ -10,7 +10,7 @@
   padding: 0.5rem;
   border-radius: calc(var(--card-radius) / 2);
   background: var(--color-white);
-  box-shadow: 0 0.75rem 2rem rgb(107 76 230 / 16%);
+  box-shadow: var(--primary-shadow);
 }
 .item {
   width: 100%;
