@@ -15,7 +15,7 @@
   flex-direction: column;
   gap: 0.75rem;
   border-radius: calc(var(--card-radius) / 2);
-  width: 50%;
+  width: 100%;
 }
 .field_icon {
   height: 100%;
