@@ -1,6 +1,8 @@
 import { ChangeEvent } from "react";
 import NextLink from "next/link";
 
+import Tooltip from "components/Tooltip";
+
 //utils
 import { useUser } from "hooks/useUser";
 
@@ -31,18 +33,44 @@ export default function NavbarRightContent() {
         <i className="uil uil-moon dark-theme-icon"></i>
       </label>
       {user ? (
-        <NextLink href="/home">
-          <a>
+        <>
+          <NextLink href="/share">
+            <a className="btn primary">Crear</a>
+          </NextLink>
+
+          <Tooltip content={<UserOptions />}>
             <picture className="profile-photo">
               <img src={user.user?.image || ""} alt={user.user?.name || ""} />
             </picture>
-          </a>
-        </NextLink>
+          </Tooltip>
+        </>
       ) : (
         <NextLink href="/login">
           <a className="btn primary">Login </a>
         </NextLink>
       )}
+    </>
+  );
+}
+
+function UserOptions() {
+  const { signOut } = useUser();
+  return (
+    <>
+      <div className="container">
+        <button className="btn">Settings</button>
+        <button onClick={() => signOut()} className="btn primary">
+          Loggout
+        </button>
+      </div>
+      <style jsx>{`
+        .container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+        }
+      `}</style>
     </>
   );
 }
