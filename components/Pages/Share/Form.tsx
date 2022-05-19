@@ -16,7 +16,7 @@ const data = [
 export default function FormShare() {
   return (
     <section>
-      <h3 className="subtile">Comparte algo que conozcas</h3>
+      <h3 className="subtitle">Comparte algo que conozcas</h3>
       <form className={style.share_container}>
         <FormInput
           type="text"
