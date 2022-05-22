@@ -37,6 +37,9 @@ export default function FormShare() {
             <FormImageInput h={"240px"} />
           </FormGroup>
         </aside>
+        <div className={style.form_submit_container}>
+          <button className={style.form_submit}>Crear</button>
+        </div>
       </form>
     </section>
   );
