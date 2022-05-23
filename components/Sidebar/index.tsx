@@ -1,50 +1,26 @@
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 
-const linksList = [
-  {
-    href: "/home",
-    label: "Home",
-    icon: <i className="uil uil-home"></i>,
-  },
-  {
-    href: "/explore",
-    label: "Explorar",
-    icon: <i className="uil uil-compass"></i>,
-  },
-  {
-    href: "/saved",
-    label: "Mi lista",
-    icon: <i className="uil uil-bookmark"></i>,
-  },
-  {
-    href: "/stats",
-    label: "Estadísticas",
-    icon: <i className="uil uil-chart-line"></i>,
-  },
-  {
-    href: "/settings",
-    label: "Configuración",
-    icon: <i className="uil uil-setting"></i>,
-  },
-];
+import { linksList } from "components/Sidebar/utils";
+
+import { useUser } from "hooks/useUser";
 
 export default function Sidebar() {
+  const { user: userData } = useUser();
   const router = useRouter();
   const { pathname } = router;
+
+  const user = userData?.user;
 
   return (
     <>
       <a href="" className="profile-link">
         <picture className="profile-photo">
-          <img
-            src="https://images.unsplash.com/photo-1651868722945-fab942eaaec5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
-            alt="profile 1"
-          />
+          <img src={user?.image || ""} alt="profile 1" />
         </picture>
         <div className="handle">
-          <h4>Diana Doe</h4>
-          <p className="text-muted text-sm">@Diana</p>
+          <h4>{user?.name}</h4>
+          <p className="text-muted text-sm">{user?.email}</p>
         </div>
       </a>
 

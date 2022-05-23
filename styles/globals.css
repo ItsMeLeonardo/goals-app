@@ -104,6 +104,7 @@ a:visited {
 }
 .profile-photo {
   width: 2.7rem;
+  height: 2.7rem;
   aspect-ratio: 1;
   border-radius: 50%;
 }
@@ -245,6 +246,13 @@ main .container {
   align-items: center;
   column-gap: 1rem;
   width: 100%;
+}
+.handle h4,
+.handle p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 15ch;
 }
 .sidebar {
   margin-top: 1rem;
