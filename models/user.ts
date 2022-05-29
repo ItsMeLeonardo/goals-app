@@ -5,15 +5,14 @@ export type User = {
   username: string;
   email: string;
   avatar: string;
-  posts: Post[];
-  postsSaved: Post[];
+  posts?: Post[];
+  postsSaved?: Post[];
 };
 
 const userSchema = new Schema<User, Model<User>>({
   username: {
     type: String,
     required: [true, "Username is required"],
-    unique: true,
   },
   email: {
     type: String,
