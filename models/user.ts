@@ -1,7 +1,8 @@
 import type { Post } from "models/post";
-import { Schema, model, Model } from "mongoose";
+import mongoose, { Schema, model, Model } from "mongoose";
 
 export type User = {
+  id: string | Schema.Types.ObjectId;
   username: string;
   email: string;
   avatar: string;
@@ -48,6 +49,6 @@ userSchema.set("toJSON", {
   },
 });
 
-const userModel = model<User>("User", userSchema);
+const userModel = mongoose.models.User || model<User>("User", userSchema);
 
 export default userModel;
