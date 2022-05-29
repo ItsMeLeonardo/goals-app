@@ -40,6 +40,14 @@ const userSchema = new Schema<User, Model<User>>({
   ],
 });
 
+userSchema.set("toJSON", {
+  transform(doc, ret) {
+    ret.id = ret._id.toString();
+    delete ret._id;
+    delete ret.__v;
+  },
+});
+
 const userModel = model<User>("User", userSchema);
 
 export default userModel;

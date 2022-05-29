@@ -33,4 +33,14 @@ const postSchema = new Schema<Post, Model<Post>>({
   ],
 });
 
+postSchema.set("toJSON", {
+  transform(doc, ret) {
+    ret.id = ret._id.toString();
+    delete ret._id;
+    delete ret.__v;
+  },
+});
+
 const postModel = model<Post>("Post", postSchema);
+
+export default postModel;
