@@ -1,4 +1,4 @@
-import FormShare from "components/Pages/Share/Form";
+import FormShare from "components/Pages/Share";
 
 export default function Share() {
   return <FormShare />;

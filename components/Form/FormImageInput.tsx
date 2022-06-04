@@ -5,10 +5,11 @@ import Form from "./form.module.css";
 type Props = {
   w?: number | string;
   h?: number | string;
+  onLoadImage?: (file: File) => void;
 };
 
 export default function FormImageInput(
-  { w, h }: Props = { w: "100%", h: "100%" }
+  { w, h, onLoadImage }: Props = { w: "100%", h: "100%" }
 ) {
   const [fileUrl, setFileUrl] = useState("");
 
@@ -17,9 +18,13 @@ export default function FormImageInput(
 
     if (files && files.length > 0) {
       const file = files[0];
+
       const url = URL.createObjectURL(file);
       setFileUrl(url);
       setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+      if (!onLoadImage) return;
+      onLoadImage(file);
     }
   };
 

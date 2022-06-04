@@ -7,6 +7,7 @@ export type AutocompleteItem = {
 
 export type AutocompleteProps = {
   data: AutocompleteItem[];
+  onSelect?: (items: AutocompleteItem[]) => void;
 };
 
 export type ItemCallback = (item: AutocompleteItem) => void;

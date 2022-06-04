@@ -12,7 +12,7 @@ import type {
   AutocompleteItem,
 } from "components/Autocomplete/types";
 
-export default function Autocomplete({ data }: AutocompleteProps) {
+export default function Autocomplete({ data, onSelect }: AutocompleteProps) {
   const [inputValue, setInputValue] = useState("");
   const [results, setResults] = useState<AutocompleteItem[]>(data);
 
@@ -28,8 +28,9 @@ export default function Autocomplete({ data }: AutocompleteProps) {
 
       return { ...result, isSelected: !result.isSelected };
     });
-    console.log({ resultsUpdated });
     setResults(resultsUpdated);
+    if (!onSelect) return;
+    onSelect(resultsUpdated.filter((result) => result.isSelected));
   };
 
   const resultsToShow = results.filter((item) => {
