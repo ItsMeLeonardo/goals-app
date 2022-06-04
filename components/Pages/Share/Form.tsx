@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
 import { useShare } from "components/Pages/Share/hooks/useShare";
+import { useUser } from "hooks/useUser";
 
 import Autocomplete from "components/Autocomplete";
 import FormGroup from "components/Form/FormGroup";
@@ -11,6 +12,8 @@ import style from "./formShare.module.css";
 
 //types
 import type { AutocompleteItem } from "components/Autocomplete/types";
+import type { Post } from "models/post";
+import type { Tag } from "models/tag";
 
 const data = [
   { id: "1", label: "C++", value: "C++" },
@@ -23,16 +26,24 @@ const data = [
 export default function FormShare() {
   const { formState, setImage, setTags, setTitle, setUrl } = useShare();
   const [firstFormView, setFirstFormView] = useState(true);
-  const { tags, title, url } = formState;
-  useEffect(() => {
-    if (firstFormView) return;
-  }, [formState, firstFormView]);
+  const { user } = useUser();
+
+  const { title, url } = formState;
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFirstFormView(false);
-    //TODO: add validation and save in db
-    console.log({ formState });
+
+    if (!user) return;
+    const id = user.userId as string;
+
+    const postBody: Omit<Post, "id"> = {
+      title,
+      url,
+      tags: formState.tags.map((tag) => ({ name: tag })) as Tag[],
+      user: id,
+      thumbnail: formState.image?.name || "",
+    };
   };
 
   const handleChangeUrl = (event: FormEvent<HTMLInputElement>) => {

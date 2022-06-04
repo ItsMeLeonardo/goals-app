@@ -6,8 +6,10 @@ import type { Tag } from "models/tag";
 export type Post = {
   url: string;
   title: string;
-  user: User;
+  user: string | Schema.Types.ObjectId;
   tags: Tag[];
+  id: string | Schema.Types.ObjectId;
+  thumbnail: string;
 };
 
 const postSchema = new Schema<Post, Model<Post>>({
@@ -31,6 +33,10 @@ const postSchema = new Schema<Post, Model<Post>>({
       },
     },
   ],
+  thumbnail: {
+    type: String,
+    required: [true, "Thumbnail is required"],
+  },
 });
 
 postSchema.set("toJSON", {
