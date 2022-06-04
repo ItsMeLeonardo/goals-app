@@ -57,3 +57,16 @@
 .image_placeholder_icon {
   font-size: 1.5rem;
 }
+/* ====ERRORS ==== */
+.error_message {
+  position: absolute;
+  font-size: 12px;
+  padding: 0 0.5rem;
+  top: -0.5rem;
+  color: var(--color-danger);
+  left: 1rem;
+  background: linear-gradient(0deg, var(--color-light), var(--color-white));
+}
+.input_error:focus {
+  outline-color: var(--color-danger);
+}
