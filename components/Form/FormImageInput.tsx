@@ -12,14 +12,18 @@ export default function FormImageInput(
   { w, h, onLoadImage }: Props = { w: "100%", h: "100%" }
 ) {
   const [fileUrl, setFileUrl] = useState("");
+  const [error, setError] = useState<boolean>(false);
 
   const loadFile = (event: ChangeEvent<HTMLInputElement>) => {
+    if (error) setError(false);
+
     const { files } = event.target;
 
     if (files && files.length > 0) {
       const file = files[0];
 
       const url = URL.createObjectURL(file);
+
       setFileUrl(url);
       setTimeout(() => URL.revokeObjectURL(url), 1000);
 
@@ -28,19 +32,28 @@ export default function FormImageInput(
     }
   };
 
+  const onErrorLoad = () => {
+    setFileUrl("");
+    setError(true);
+  };
+
+  const infoMessage = error
+    ? "Ocurrió un error al subir la imagen, vuelve a intentarlo"
+    : "Sube una imagen para el recurso";
+
   return (
     <label className="">
       <input type="file" hidden accept="image/*" onChange={loadFile} />
       <picture className={Form.image_container} style={{ width: w, height: h }}>
         {fileUrl.length === 0 ? (
           <div className={Form.image_placeholder}>
-            <span>Sube una imagen para el recurso</span>
+            <span>{infoMessage}</span>
             <i
               className={`${Form.image_placeholder_icon} uil uil-image-plus`}
             ></i>
           </div>
         ) : (
-          <img src={fileUrl} alt="thumbnail" />
+          <img src={fileUrl} alt="thumbnail" onError={onErrorLoad} />
         )}
       </picture>
     </label>
