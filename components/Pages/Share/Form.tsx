@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 import { useShare } from "components/Pages/Share/hooks/useShare";
 
@@ -21,14 +22,23 @@ const data = [
 
 export default function FormShare() {
   const { formState, setImage, setTags, setTitle, setUrl } = useShare();
+  const [firstFormView, setFirstFormView] = useState(true);
+  const { tags, title, url } = formState;
+  useEffect(() => {
+    if (firstFormView) return;
+  }, [formState, firstFormView]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setFirstFormView(false);
+    //TODO: add validation and save in db
     console.log({ formState });
   };
 
   const handleChangeUrl = (event: FormEvent<HTMLInputElement>) => {
-    setUrl(event.currentTarget.value);
+    const { value } = event.currentTarget;
+    const url = value.trim();
+    setUrl(url);
   };
 
   const handleChangeTitle = (event: FormEvent<HTMLInputElement>) => {
@@ -43,6 +53,12 @@ export default function FormShare() {
     setImage(file);
   };
 
+  //error messages
+  const urlErrorMessage =
+    url.length === 0 && !firstFormView ? "El link es requerido" : undefined;
+  const titleErrorMessage =
+    title.length === 0 && !firstFormView ? "El titulo es requerido" : undefined;
+
   return (
     <section>
       <h3 className="subtitle">Comparte algo que conozcas</h3>
@@ -53,6 +69,7 @@ export default function FormShare() {
           placeholder="Link del recurso"
           onInput={handleChangeUrl}
           required
+          error={urlErrorMessage}
         />
         <aside className={style.form_share}>
           <FormGroup>
@@ -62,6 +79,7 @@ export default function FormShare() {
               placeholder="Titulo del recurso"
               onInput={handleChangeTitle}
               required
+              error={titleErrorMessage}
             />
 
             <Autocomplete data={data} onSelect={handleChangeTags} />
