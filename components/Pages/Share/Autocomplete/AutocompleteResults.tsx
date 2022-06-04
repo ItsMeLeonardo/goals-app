@@ -1,6 +1,6 @@
 import style from "./autocomplete.module.css";
 
-import type { AutocompleteResultsProps } from "components/Autocomplete/types";
+import type { AutocompleteResultsProps } from "components/Pages/Share/Autocomplete/types";
 
 export default function AutocompleteResults(props: AutocompleteResultsProps) {
   const { onSelect, results } = props;

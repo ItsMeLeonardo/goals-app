@@ -3,7 +3,7 @@ import type { FormEvent } from "react";
 import { useShare } from "components/Pages/Share/hooks/useShare";
 import { useUser } from "hooks/useUser";
 
-import Autocomplete from "components/Autocomplete";
+import Autocomplete from "components/Pages/Share/Autocomplete";
 import FormGroup from "components/Form/FormGroup";
 import FormInput from "components/Form/FormInput";
 import FormImageInput from "components/Form/FormImageInput";
@@ -11,7 +11,7 @@ import FormImageInput from "components/Form/FormImageInput";
 import style from "./formShare.module.css";
 
 //types
-import type { AutocompleteItem } from "components/Autocomplete/types";
+import type { AutocompleteItem } from "components/Pages/Share/Autocomplete/types";
 import type { Post } from "models/post";
 import type { Tag } from "models/tag";
 
@@ -24,7 +24,7 @@ const data = [
 ];
 
 export default function FormShare() {
-  const { formState, setImage, setTags, setTitle, setUrl } = useShare();
+  const { formState, setImage, setTags, setTitle, setUrl, reset } = useShare();
   const [firstFormView, setFirstFormView] = useState(true);
   const { user } = useUser();
 
@@ -33,6 +33,8 @@ export default function FormShare() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setFirstFormView(false);
+
+    reset();
 
     if (!user) return;
     const id = user.userId as string;
@@ -80,6 +82,7 @@ export default function FormShare() {
           placeholder="Link del recurso"
           onInput={handleChangeUrl}
           required
+          value={url}
           error={urlErrorMessage}
         />
         <aside className={style.form_share}>
@@ -90,6 +93,7 @@ export default function FormShare() {
               placeholder="Titulo del recurso"
               onInput={handleChangeTitle}
               required
+              value={title}
               error={titleErrorMessage}
             />
 

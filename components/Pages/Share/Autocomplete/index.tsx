@@ -1,8 +1,10 @@
 import { useState, ChangeEvent } from "react";
 
 import FormInput from "components/Form/FormInput";
-import AutocompleteOutput from "components/Autocomplete/AutocompleteOutput";
-import AutocompleteResults from "components/Autocomplete/AutocompleteResults";
+import AutocompleteOutput from "components/Pages/Share/Autocomplete/AutocompleteOutput";
+import AutocompleteResults from "components/Pages/Share/Autocomplete/AutocompleteResults";
+
+import { useShare } from "components/Pages/Share/hooks/useShare";
 
 import style from "./autocomplete.module.css";
 
@@ -10,11 +12,14 @@ import type {
   AutocompleteProps,
   ItemCallback,
   AutocompleteItem,
-} from "components/Autocomplete/types";
+} from "components/Pages/Share/Autocomplete/types";
 
 export default function Autocomplete({ data, onSelect }: AutocompleteProps) {
   const [inputValue, setInputValue] = useState("");
+  const { formState } = useShare();
   const [results, setResults] = useState<AutocompleteItem[]>(data);
+
+  const { tags } = formState;
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -37,7 +42,8 @@ export default function Autocomplete({ data, onSelect }: AutocompleteProps) {
     return item.label.toLowerCase().includes(inputValue.toLowerCase());
   });
 
-  const optionsSelected = results.filter((item) => item.isSelected);
+  const optionsSelected =
+    tags.length > 0 ? results.filter((item) => item.isSelected) : [];
 
   return (
     <aside className={style.check_container}>

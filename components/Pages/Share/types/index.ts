@@ -13,6 +13,7 @@ export type FormShareContextType = {
   setUrl: (url: string) => void;
   setTags: (tags: string[]) => void;
   setImage: (image: File) => void;
+  reset: () => void;
 };
 
 export type ProviderProps = {
@@ -25,6 +26,7 @@ export enum ActionKind {
   setTitle = "SET_TITLE",
   setTags = "SET_TAGS",
   setImage = "SET_IMAGE",
+  reset = "RESET",
 }
 
 export type Action = {

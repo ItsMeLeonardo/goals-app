@@ -1,6 +1,6 @@
 import style from "./autocomplete.module.css";
 
-import type { AutocompleteOutputProps } from "components/Autocomplete/types";
+import type { AutocompleteOutputProps } from "components/Pages/Share/Autocomplete/types";
 
 export default function AutocompleteOutput(props: AutocompleteOutputProps) {
   const { options, onClick } = props;

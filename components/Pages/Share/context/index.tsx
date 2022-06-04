@@ -21,6 +21,7 @@ const initialValue: FormShareContextType = {
   setTitle: () => {},
   setUrl: () => {},
   setTags: () => {},
+  reset: () => {},
 };
 
 export const FormShareContext =
@@ -50,6 +51,8 @@ const formReducer = (
       return state;
     case ActionKind.setImage:
       return { ...state, image: payload };
+    case ActionKind.reset:
+      return initialState;
   }
 };
 
@@ -71,12 +74,17 @@ export function FormShareProvider({ children }: ProviderProps) {
     dispatch({ type: ActionKind.setImage, payload: image });
   };
 
+  const reset = () => {
+    dispatch({ type: ActionKind.reset, payload: "" });
+  };
+
   const value = {
     state,
     setTitle,
     setUrl,
     setTags,
     setImage,
+    reset,
   };
 
   return (
