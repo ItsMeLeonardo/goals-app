@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 
 import Form from "./form.module.css";
 
@@ -6,13 +6,21 @@ type Props = {
   w?: number | string;
   h?: number | string;
   onLoadImage?: (file: File) => void;
+  clear?: boolean;
 };
 
 export default function FormImageInput(
-  { w, h, onLoadImage }: Props = { w: "100%", h: "100%" }
+  { w, h, onLoadImage, clear }: Props = { w: "100%", h: "100%" }
 ) {
   const [fileUrl, setFileUrl] = useState("");
   const [error, setError] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (clear) {
+      setFileUrl("");
+      setError(false);
+    }
+  }, [clear]);
 
   const loadFile = (event: ChangeEvent<HTMLInputElement>) => {
     if (error) setError(false);

@@ -15,6 +15,8 @@ import type { AutocompleteItem } from "components/Pages/Share/Autocomplete/types
 import type { Post } from "models/post";
 import type { Tag } from "models/tag";
 
+type FormStatus = "default" | "loading" | "error" | "success";
+
 const data = [
   { id: "1", label: "C++", value: "C++" },
   { id: "2", label: "Java", value: "Java" },
@@ -26,6 +28,7 @@ const data = [
 export default function FormShare() {
   const { formState, setImage, setTags, setTitle, setUrl, reset } = useShare();
   const [firstFormView, setFirstFormView] = useState(true);
+  const [formStatus, setFormStatus] = useState<FormStatus>("default");
   const { user } = useUser();
 
   const { title, url } = formState;
@@ -35,7 +38,11 @@ export default function FormShare() {
     setFirstFormView(false);
 
     reset();
+    setFormStatus("success");
 
+    setTimeout(() => {
+      setFormStatus("default");
+    }, 3000);
     if (!user) return;
     const id = user.userId as string;
 
@@ -100,7 +107,11 @@ export default function FormShare() {
             <Autocomplete data={data} onSelect={handleChangeTags} />
           </FormGroup>
           <FormGroup>
-            <FormImageInput h={"240px"} onLoadImage={handleChangeImage} />
+            <FormImageInput
+              h={"240px"}
+              onLoadImage={handleChangeImage}
+              clear={formStatus === "success"}
+            />
           </FormGroup>
         </aside>
         <div className={style.form_submit_container}>
