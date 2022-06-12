@@ -1,6 +1,7 @@
 import { Schema, model, Model } from "mongoose";
 
 export type Tag = {
+  id: string | Schema.Types.ObjectId;
   name: string;
 };
 
