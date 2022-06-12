@@ -9,7 +9,7 @@ export async function search(
 ): Promise<RequestCall<Tag[]> | null> {
   try {
     const controller = getCallController();
-    const data = await api.get<Tag[]>("tags", {
+    const { data } = await api.get<Tag[]>("tags", {
       signal: controller.signal,
       params: {
         name: query,
