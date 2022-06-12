@@ -1,17 +1,18 @@
 import type { ReactNode } from "react";
+import type { AutocompleteItem } from "components/Pages/Share/Autocomplete/types";
 
 export type FormShare = {
   url: string;
   title: string;
   image?: File;
-  tags: string[];
+  tags: AutocompleteItem[];
 };
 
 export type FormShareContextType = {
   state: FormShare;
   setTitle: (title: string) => void;
   setUrl: (url: string) => void;
-  setTags: (tags: string[]) => void;
+  setTags: (tags: AutocompleteItem[]) => void;
   setImage: (image: File) => void;
   reset: () => void;
 };
@@ -31,7 +32,7 @@ export enum ActionKind {
 
 export type Action = {
   type: Exclude<ActionKind, ActionKind.setImage>;
-  payload: string | string[];
+  payload: string | AutocompleteItem[];
 };
 
 export type FileAction = {

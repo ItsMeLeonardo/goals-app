@@ -14,7 +14,7 @@ export default function AutocompleteOutput(props: AutocompleteOutputProps) {
           onClick={() => onClick(item)}
         >
           <span>
-            {item.label} <i className="uil uil-times-circle"></i>
+            {item.name} <i className="uil uil-times-circle"></i>
           </span>
         </li>
       ))}

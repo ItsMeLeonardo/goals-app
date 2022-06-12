@@ -7,6 +7,8 @@ import type {
   FileAction,
   FormShareContextType,
 } from "components/Pages/Share/types";
+import type { AutocompleteItem } from "components/Pages/Share/Autocomplete/types";
+
 import { ActionKind } from "components/Pages/Share/types";
 
 const initialState: FormShare = {
@@ -66,7 +68,7 @@ export function FormShareProvider({ children }: ProviderProps) {
     dispatch({ type: ActionKind.setUrl, payload: url });
   };
 
-  const setTags = (tags: string[]) => {
+  const setTags = (tags: AutocompleteItem[]) => {
     dispatch({ type: ActionKind.setTags, payload: tags });
   };
 

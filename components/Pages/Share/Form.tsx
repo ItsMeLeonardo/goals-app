@@ -3,7 +3,7 @@ import type { FormEvent } from "react";
 import { useShare } from "components/Pages/Share/hooks/useShare";
 import { useUser } from "hooks/useUser";
 
-import Autocomplete from "components/Pages/Share/Autocomplete";
+import AutocompleteTag from "components/Pages/Share/Autocomplete";
 import FormGroup from "components/Form/FormGroup";
 import FormInput from "components/Form/FormInput";
 import FormImageInput from "components/Form/FormImageInput";
@@ -16,14 +16,6 @@ import type { Post } from "models/post";
 import type { Tag } from "models/tag";
 
 type FormStatus = "default" | "loading" | "error" | "success";
-
-const data = [
-  { id: "1", label: "C++", value: "C++" },
-  { id: "2", label: "Java", value: "Java" },
-  { id: "3", label: "Python", value: "Python" },
-  { id: "4", label: "JavaScript", value: "JavaScript" },
-  { id: "5", label: "html", value: "html" },
-];
 
 export default function FormShare() {
   const { formState, setImage, setTags, setTitle, setUrl, reset } = useShare();
@@ -46,10 +38,12 @@ export default function FormShare() {
     if (!user) return;
     const id = user.userId as string;
 
+    const tags = formState.tags as Tag[];
+
     const postBody: Omit<Post, "id"> = {
       title,
       url,
-      tags: formState.tags.map((tag) => ({ name: tag })) as Tag[],
+      tags,
       user: id,
       thumbnail: formState.image?.name || "",
     };
@@ -66,7 +60,7 @@ export default function FormShare() {
   };
 
   const handleChangeTags = (items: AutocompleteItem[]) => {
-    setTags(items.map((item) => item.value));
+    setTags(items);
   };
 
   const handleChangeImage = (file: File) => {
@@ -104,7 +98,7 @@ export default function FormShare() {
               error={titleErrorMessage}
             />
 
-            <Autocomplete data={data} onSelect={handleChangeTags} />
+            <AutocompleteTag />
           </FormGroup>
           <FormGroup>
             <FormImageInput
