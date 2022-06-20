@@ -9,8 +9,8 @@ export default async function saveImage(
   res: NextApiResponse,
   next: Function
 ) {
-  const { file } = req;
-
+  const { file, method } = req;
+  if (method !== "POST") return next();
   const [media, error] = await uploadImage(file);
   if (error || !media) {
     return res.status(500).json({ message: error });
