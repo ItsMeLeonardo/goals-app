@@ -1,7 +1,31 @@
+import axios, { AxiosRequestConfig } from "axios";
+
 import type { Post } from "models/post";
 
-export async function create(postBody: Omit<Post, "id">) {
-  const response = await fetch("/api/posts", {
+export async function create(
+  postBody: Omit<Post, "id" | "thumbnail">,
+  image: File
+) {
+  const postFormData = new FormData();
+
+  postFormData.append("title", postBody.title);
+  postFormData.append("url", postBody.url);
+  postFormData.append("user", postBody.user.toString());
+  postFormData.append(
+    "tags",
+    JSON.stringify(postBody.tags.map((tag) => tag.id.toString()))
+  );
+  postFormData.append("file", image);
+
+  const config: AxiosRequestConfig = {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  };
+
+  const { data } = await axios.post<Post>("/api/posts", postFormData, config);
+  return data;
+  /*   const response = await fetch("/api/posts", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -13,5 +37,5 @@ export async function create(postBody: Omit<Post, "id">) {
     return [null, error];
   }
   const post = await response.json();
-  return [post, null];
+  return [post, null]; */
 }

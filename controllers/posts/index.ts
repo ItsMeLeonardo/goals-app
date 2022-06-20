@@ -1,10 +1,11 @@
 import dbConnect from "lib/dbConnect";
 
 import type { Post } from "models/post";
+import type { PostDto } from "controllers/posts/dto";
 import PostModel from "models/post";
 
 export async function create(
-  postBody: Omit<Post, "id">
+  postBody: PostDto
 ): Promise<[Post | null, string | null]> {
   try {
     await dbConnect();
@@ -13,6 +14,7 @@ export async function create(
 
     return [post, null];
   } catch (error) {
+    console.log({ error });
     const message = (error as Error)?.message || "Something went wrong";
     return [null, message];
   }
