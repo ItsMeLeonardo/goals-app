@@ -1,4 +1,5 @@
 import mongoose, { Schema, model, Model } from "mongoose";
+import TagModel from "models/tag";
 
 import type { User } from "models/user";
 import type { Tag } from "models/tag";
@@ -27,10 +28,8 @@ const postSchema = new Schema<Post, Model<Post>>({
   },
   tags: [
     {
-      tag: {
-        type: Schema.Types.ObjectId,
-        ref: "Tag",
-      },
+      type: Schema.Types.ObjectId,
+      ref: TagModel,
     },
   ],
   thumbnail: {
@@ -48,5 +47,6 @@ postSchema.set("toJSON", {
 });
 
 const postModel = mongoose.models.Post || model<Post>("Post", postSchema);
+// const postModel = model<Post>("Post", postSchema);
 
 export default postModel;

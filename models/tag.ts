@@ -21,4 +21,5 @@ tagSchema.set("toJSON", {
 });
 
 const tagModel = mongoose.models.Tag || model<Tag>("Tag", tagSchema);
+// const tagModel = model<Tag>("Tag", tagSchema);
 export default tagModel;
