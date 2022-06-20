@@ -1,4 +1,4 @@
-import { Schema, model, Model } from "mongoose";
+import mongoose, { Schema, model, Model } from "mongoose";
 
 import type { User } from "models/user";
 import type { Tag } from "models/tag";
@@ -47,6 +47,6 @@ postSchema.set("toJSON", {
   },
 });
 
-const postModel = model<Post>("Post", postSchema);
+const postModel = mongoose.models.Post || model<Post>("Post", postSchema);
 
 export default postModel;
