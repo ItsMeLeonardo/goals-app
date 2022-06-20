@@ -8,6 +8,10 @@ import FormGroup from "components/Form/FormGroup";
 import FormInput from "components/Form/FormInput";
 import FormImageInput from "components/Form/FormImageInput";
 
+//services
+import { create } from "services/post";
+
+// styles
 import style from "./formShare.module.css";
 
 //types
@@ -29,24 +33,29 @@ export default function FormShare() {
     event.preventDefault();
     setFirstFormView(false);
 
-    reset();
-    setFormStatus("success");
-
-    setTimeout(() => {
-      setFormStatus("default");
-    }, 3000);
     if (!user) return;
     const id = user.userId as string;
 
     const tags = formState.tags as Tag[];
 
-    const postBody: Omit<Post, "id"> = {
+    const postBody: Omit<Post, "id" | "thumbnail"> = {
       title,
       url,
       tags,
       user: id,
-      thumbnail: formState.image?.name || "",
     };
+
+    if (!formState.image) return;
+
+    create(postBody, formState.image).then((data) => {
+      reset();
+      setFormStatus("success");
+
+      setTimeout(() => {
+        setFormStatus("default");
+      }, 3000);
+      console.log({ data });
+    });
   };
 
   const handleChangeUrl = (event: FormEvent<HTMLInputElement>) => {
