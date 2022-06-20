@@ -23,7 +23,6 @@ function uploadStream(
 ): Promise<UploadApiResponse | UploadApiErrorResponse> {
   return new Promise((resolve, reject) => {
     const cloudinaryDone: UploadResponseCallback = (error, result) => {
-      console.log({ result });
       return !error && result ? resolve(result) : reject(error);
     };
     cloudinary.uploader.upload_stream(config, cloudinaryDone).end(buffer);
