@@ -44,7 +44,7 @@ handler.post(async (req, res) => {
     title,
     url,
     user,
-    tags: tagsFormatted.map((tag) => ({ id: tag })),
+    tags: tagsFormatted,
     thumbnail: image,
   };
 
