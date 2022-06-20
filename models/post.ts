@@ -1,7 +1,7 @@
 import mongoose, { Schema, model, Model } from "mongoose";
 import TagModel from "models/tag";
+import UserModel from "models/user";
 
-import type { User } from "models/user";
 import type { Tag } from "models/tag";
 
 export type Post = {
@@ -24,7 +24,7 @@ const postSchema = new Schema<Post, Model<Post>>({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "User",
+    ref: UserModel,
   },
   tags: [
     {

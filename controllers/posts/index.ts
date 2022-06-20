@@ -10,8 +10,11 @@ export async function create(
   try {
     await dbConnect();
 
-    const post = await PostModel.create(postBody);
-
+    const newPost = await PostModel.create(postBody);
+    const post = await PostModel.findById(newPost._id)
+      .populate("tags")
+      .populate("user");
+    // const post = await PostModel.create(postBody);
     return [post, null];
   } catch (error) {
     console.log({ error });
