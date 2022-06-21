@@ -19,6 +19,12 @@
   cursor: pointer;
 }
 
+.result_body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .result_thumbnail {
   display: none;
 }
