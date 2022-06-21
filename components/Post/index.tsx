@@ -4,9 +4,6 @@ export default function Post() {
   return (
     <li className={styles.result_item}>
       <aside className={styles.result_body}>
-        <h3 className={styles.result_title}>
-          ¿Cómo iniciar con la programción web?
-        </h3>
         <div className={styles.result_user}>
           <picture className={styles.result_user_photo}>
             <img src="https://images.unsplash.com/photo-1634824986790-db9044b0cd9d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8amFwYW4lMjBwcm9maWxlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" />
@@ -16,12 +13,16 @@ export default function Post() {
             <span className="text-muted">hace 2 dias</span>
           </h4>
         </div>
-        <p className={styles.result_preview}>
+        <h3 className={styles.result_title}>
+          ¿Cómo iniciar con la programción web?
+        </h3>
+
+        {/*         <p className={styles.result_preview}>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
           perferendis illum optio commodi tenetur, quo hic numquam odio
           consequatur sunt temporibus sint voluptate consequuntur necessitatibus
           quasi. Repellat sint sequi rem.
-        </p>
+        </p> */}
         <ul className="feed-tag-list">
           <li className="feed-tag">
             <span className="feed-tag-text">#html</span>
