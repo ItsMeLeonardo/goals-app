@@ -3,11 +3,12 @@ import TagModel from "models/tag";
 import UserModel from "models/user";
 
 import type { Tag } from "models/tag";
+import type { User } from "models/user";
 
 export type Post = {
   url: string;
   title: string;
-  user: string | Schema.Types.ObjectId;
+  user: User;
   tags: Tag[];
   id: string | Schema.Types.ObjectId;
   thumbnail: string;
