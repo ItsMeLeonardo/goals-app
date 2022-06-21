@@ -4,6 +4,5 @@ export type PostDto = {
   title: string;
   user: string;
   tags: string[];
-  // tags: Omit<Tag, "name">[];
-  thumbnail: string;
+  thumbnail?: string;
 };

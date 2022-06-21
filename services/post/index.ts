@@ -1,20 +1,15 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+import type { PostDto } from "controllers/posts/dto";
 import type { Post } from "models/post";
 
-export async function create(
-  postBody: Omit<Post, "id" | "thumbnail">,
-  image: File
-) {
+export async function create(postBody: PostDto, image: File) {
   const postFormData = new FormData();
 
   postFormData.append("title", postBody.title);
   postFormData.append("url", postBody.url);
   postFormData.append("user", postBody.user.toString());
-  postFormData.append(
-    "tags",
-    JSON.stringify(postBody.tags.map((tag) => tag.id.toString()))
-  );
+  postFormData.append("tags", JSON.stringify(postBody.tags));
   postFormData.append("file", image);
 
   const config: AxiosRequestConfig = {
