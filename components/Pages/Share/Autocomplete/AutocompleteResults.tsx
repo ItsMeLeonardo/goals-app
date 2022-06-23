@@ -2,6 +2,7 @@ import style from "./autocomplete.module.css";
 
 import type { AutocompleteResultsProps } from "components/Pages/Share/Autocomplete/types";
 
+//TODO: add loading state
 export default function AutocompleteResults(props: AutocompleteResultsProps) {
   const { onSelect, results } = props;
 

@@ -6,7 +6,12 @@ export default function Post(props: Post) {
   const { user, tags, title, thumbnail, url } = props;
   return (
     <li>
-      <a href={url} className={styles.result_item}>
+      <a
+        href={url}
+        className={styles.result_item}
+        target="_blank"
+        rel="noreferrer"
+      >
         <aside className={styles.result_body}>
           <div className={styles.result_user}>
             <picture className={styles.result_user_photo}>

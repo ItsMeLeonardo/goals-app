@@ -7,6 +7,7 @@ import AutocompleteTag from "components/Pages/Share/Autocomplete";
 import FormGroup from "components/Form/FormGroup";
 import FormInput from "components/Form/FormInput";
 import FormImageInput from "components/Form/FormImageInput";
+import PostComponent from "components/Post";
 
 //services
 import { create } from "services/post";
@@ -16,16 +17,18 @@ import style from "./formShare.module.css";
 
 //types
 import type { AutocompleteItem } from "components/Pages/Share/Autocomplete/types";
+import type { PostDto } from "controllers/posts/dto";
 import type { Post } from "models/post";
 import type { Tag } from "models/tag";
 
 type FormStatus = "default" | "loading" | "error" | "success";
 
 export default function FormShare() {
-  const { formState, setImage, setTags, setTitle, setUrl, reset } = useShare();
+  const { formState, setImage, setTitle, setUrl, reset } = useShare();
   const [firstFormView, setFirstFormView] = useState(true);
   const [formStatus, setFormStatus] = useState<FormStatus>("default");
   const { user } = useUser();
+  const [postSaved, setPostSaved] = useState<Post | null>(null);
 
   const { title, url } = formState;
 
@@ -38,10 +41,10 @@ export default function FormShare() {
 
     const tags = formState.tags as Tag[];
 
-    const postBody: Omit<Post, "id" | "thumbnail"> = {
+    const postBody: PostDto = {
       title,
       url,
-      tags,
+      tags: tags.map((tag) => tag.id.toString()),
       user: id,
     };
 
@@ -54,7 +57,7 @@ export default function FormShare() {
       setTimeout(() => {
         setFormStatus("default");
       }, 3000);
-      console.log({ data });
+      setPostSaved(data);
     });
   };
 
@@ -68,10 +71,6 @@ export default function FormShare() {
     setTitle(event.currentTarget.value);
   };
 
-  const handleChangeTags = (items: AutocompleteItem[]) => {
-    setTags(items);
-  };
-
   const handleChangeImage = (file: File) => {
     setImage(file);
   };
@@ -83,44 +82,51 @@ export default function FormShare() {
     title.length === 0 && !firstFormView ? "El titulo es requerido" : undefined;
 
   return (
-    <section>
-      <h3 className="subtitle">Comparte algo que conozcas</h3>
-      <form className={style.share_container} onSubmit={handleSubmit}>
-        <FormInput
-          type="url"
-          icon={<i className="uil uil-link field-icon"></i>}
-          placeholder="Link del recurso"
-          onInput={handleChangeUrl}
-          required
-          value={url}
-          error={urlErrorMessage}
-        />
-        <aside className={style.form_share}>
-          <FormGroup>
-            <FormInput
-              type="text"
-              icon={<i className="uil uil-text "></i>}
-              placeholder="Titulo del recurso"
-              onInput={handleChangeTitle}
-              required
-              value={title}
-              error={titleErrorMessage}
-            />
+    <>
+      <section>
+        <h3 className="subtitle">Comparte algo que conozcas</h3>
+        <form className={style.share_container} onSubmit={handleSubmit}>
+          <FormInput
+            type="url"
+            icon={<i className="uil uil-link field-icon"></i>}
+            placeholder="Link del recurso"
+            onInput={handleChangeUrl}
+            required
+            value={url}
+            error={urlErrorMessage}
+          />
+          <aside className={style.form_share}>
+            <FormGroup>
+              <FormInput
+                type="text"
+                icon={<i className="uil uil-text "></i>}
+                placeholder="Titulo del recurso"
+                onInput={handleChangeTitle}
+                required
+                value={title}
+                error={titleErrorMessage}
+              />
 
-            <AutocompleteTag />
-          </FormGroup>
-          <FormGroup>
-            <FormImageInput
-              h={"240px"}
-              onLoadImage={handleChangeImage}
-              clear={formStatus === "success"}
-            />
-          </FormGroup>
-        </aside>
-        <div className={style.form_submit_container}>
-          <button className={style.form_submit}>Crear</button>
-        </div>
-      </form>
-    </section>
+              <AutocompleteTag />
+            </FormGroup>
+            <FormGroup>
+              <FormImageInput
+                h={"240px"}
+                onLoadImage={handleChangeImage}
+                clear={formStatus === "success"}
+              />
+            </FormGroup>
+          </aside>
+          <div className={style.form_submit_container}>
+            <button className={style.form_submit}>Crear</button>
+          </div>
+        </form>
+      </section>
+      {postSaved && (
+        <section className={style.postResult}>
+          <PostComponent {...postSaved} />
+        </section>
+      )}
+    </>
   );
 }

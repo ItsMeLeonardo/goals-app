@@ -1,5 +1,10 @@
+.postResult {
+  margin: 4rem 0 1rem 0;
+}
+
 /* ========== Form containers ========== */
 .share_container {
+  position: relative;
   width: 100%;
   padding: var(--card-padding);
   background: var(--color-white);
