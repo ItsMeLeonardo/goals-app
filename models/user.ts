@@ -10,36 +10,39 @@ export type User = {
   postsSaved?: Post[];
 };
 
-const userSchema = new Schema<User, Model<User>>({
-  username: {
-    type: String,
-    required: [true, "Username is required"],
-  },
-  email: {
-    type: String,
-    required: [true, "Email is required"],
-    unique: true,
-  },
-  avatar: {
-    type: String,
-  },
-  posts: [
-    {
-      post: {
-        type: Schema.Types.ObjectId,
-        ref: "Post",
-      },
+const userSchema = new Schema<User, Model<User>>(
+  {
+    username: {
+      type: String,
+      required: [true, "Username is required"],
     },
-  ],
-  postsSaved: [
-    {
-      post: {
-        type: Schema.Types.ObjectId,
-        ref: "Post",
-      },
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      unique: true,
     },
-  ],
-});
+    avatar: {
+      type: String,
+    },
+    posts: [
+      {
+        post: {
+          type: Schema.Types.ObjectId,
+          ref: "Post",
+        },
+      },
+    ],
+    postsSaved: [
+      {
+        post: {
+          type: Schema.Types.ObjectId,
+          ref: "Post",
+        },
+      },
+    ],
+  },
+  { timestamps: true }
+);
 
 userSchema.set("toJSON", {
   transform(doc, ret) {
@@ -50,5 +53,6 @@ userSchema.set("toJSON", {
 });
 
 const userModel = mongoose.models.User || model<User>("User", userSchema);
+// const userModel = model<User>("User", userSchema);
 
 export default userModel;

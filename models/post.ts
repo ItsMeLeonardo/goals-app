@@ -14,30 +14,33 @@ export type Post = {
   thumbnail: string;
 };
 
-const postSchema = new Schema<Post, Model<Post>>({
-  url: {
-    type: String,
-    required: [true, "Url is required"],
-  },
-  title: {
-    type: String,
-    required: [true, "Title is required"],
-  },
-  user: {
-    type: Schema.Types.ObjectId,
-    ref: UserModel,
-  },
-  tags: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: TagModel,
+const postSchema = new Schema<Post, Model<Post>>(
+  {
+    url: {
+      type: String,
+      required: [true, "Url is required"],
     },
-  ],
-  thumbnail: {
-    type: String,
-    required: [true, "Thumbnail is required"],
+    title: {
+      type: String,
+      required: [true, "Title is required"],
+    },
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: UserModel,
+    },
+    tags: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: TagModel,
+      },
+    ],
+    thumbnail: {
+      type: String,
+      required: [true, "Thumbnail is required"],
+    },
   },
-});
+  { timestamps: true }
+);
 
 postSchema.set("toJSON", {
   transform(doc, ret) {
