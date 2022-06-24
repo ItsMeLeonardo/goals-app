@@ -3,7 +3,7 @@ import type { FormEvent } from "react";
 import { useShare } from "components/Pages/Share/hooks/useShare";
 import { useUser } from "hooks/useUser";
 
-import AutocompleteTag from "components/Pages/Share/Autocomplete";
+import AutocompleteTag from "components/Pages/Share/AutocompleteTag";
 import FormGroup from "components/Form/FormGroup";
 import FormInput from "components/Form/FormInput";
 import FormImageInput from "components/Form/FormImageInput";
@@ -16,7 +16,6 @@ import { create } from "services/post";
 import style from "./formShare.module.css";
 
 //types
-import type { AutocompleteItem } from "components/Pages/Share/Autocomplete/types";
 import type { PostDto } from "controllers/posts/dto";
 import type { Post } from "models/post";
 import type { Tag } from "models/tag";

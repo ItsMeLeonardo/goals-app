@@ -3,8 +3,8 @@ import { debounce } from "throttle-debounce";
 
 // components
 import FormInput from "components/Form/FormInput";
-import AutocompleteOutput from "components/Pages/Share/Autocomplete/AutocompleteOutput";
-import AutocompleteResults from "components/Pages/Share/Autocomplete/AutocompleteResults";
+import AutocompleteOutput from "components/Pages/Share/AutocompleteTag/AutocompleteOutput";
+import AutocompleteResults from "components/Pages/Share/AutocompleteTag/AutocompleteResults";
 
 // hooks
 import { useShare } from "components/Pages/Share/hooks/useShare";
@@ -19,7 +19,7 @@ import style from "./autocomplete.module.css";
 import type {
   ItemCallback,
   AutocompleteItem,
-} from "components/Pages/Share/Autocomplete/types";
+} from "components/Pages/Share/AutocompleteTag/types";
 
 const handler = (
   query: string,

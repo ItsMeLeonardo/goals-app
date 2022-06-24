@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { AutocompleteItem } from "components/Pages/Share/Autocomplete/types";
+import type { AutocompleteItem } from "components/Pages/Share/AutocompleteTag/types";
 
 export type FormShare = {
   url: string;

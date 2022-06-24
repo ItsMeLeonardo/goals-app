@@ -1,6 +1,6 @@
 import style from "./autocomplete.module.css";
 
-import type { AutocompleteResultsProps } from "components/Pages/Share/Autocomplete/types";
+import type { AutocompleteResultsProps } from "components/Pages/Share/AutocompleteTag/types";
 
 //TODO: add loading state
 export default function AutocompleteResults(props: AutocompleteResultsProps) {

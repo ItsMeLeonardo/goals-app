@@ -7,7 +7,7 @@ import type {
   FileAction,
   FormShareContextType,
 } from "components/Pages/Share/types";
-import type { AutocompleteItem } from "components/Pages/Share/Autocomplete/types";
+import type { AutocompleteItem } from "components/Pages/Share/AutocompleteTag/types";
 
 import { ActionKind } from "components/Pages/Share/types";
 
