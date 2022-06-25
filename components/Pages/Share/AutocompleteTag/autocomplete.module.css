@@ -21,6 +21,7 @@
   cursor: pointer;
   border-radius: calc(var(--card-radius) / 2);
   color: var(--color-primary);
+  background: transparent;
 }
 .item:hover {
   background: var(--color-light);
@@ -42,6 +43,18 @@
   align-items: center;
   height: 100%;
   transform: rotate(-45deg);
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.icon_loading i {
+  animation: loading 1s linear infinite;
 }
 
 .icon_check_active {

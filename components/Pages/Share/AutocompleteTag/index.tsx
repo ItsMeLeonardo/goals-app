@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, useEffect } from "react";
 import { debounce } from "throttle-debounce";
 
 // components
@@ -44,17 +44,16 @@ const debouncedSearched = debounce(500, handler);
 
 export default function Autocomplete() {
   const [inputValue, setInputValue] = useState("");
+  const [searchLoading, setSearchLoading] = useState(false);
   const { formState, setTags } = useShare();
   const [results, setResults] = useState<AutocompleteItem[]>([]);
 
   const { tags: tagsSelected } = formState;
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setInputValue(value);
-
-    if (value.length > 0) {
-      debouncedSearched(value, (tagsResults) => {
+  useEffect(() => {
+    try {
+      setSearchLoading(true);
+      debouncedSearched(inputValue, (tagsResults) => {
         let tagsFormatted = tagsResults;
         if (tagsSelected.length > 0) {
           /* Checking if the tag is already selected and if it is, it is adding a property to the tag
@@ -69,7 +68,15 @@ export default function Autocomplete() {
         }
         setResults(tagsFormatted);
       });
+    } catch (error) {
+    } finally {
+      setSearchLoading(false);
     }
+  }, [inputValue, tagsSelected]);
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setInputValue(value);
   };
 
   const handleSelect: ItemCallback = (item) => {
@@ -102,6 +109,8 @@ export default function Autocomplete() {
           selected={tagsSelected}
           results={results}
           onSelect={handleSelect}
+          loading={searchLoading}
+          querySearch={inputValue}
         />
       )}
       <AutocompleteOutput options={tagsSelected} onClick={handleSelect} />

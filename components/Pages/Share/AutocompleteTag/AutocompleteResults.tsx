@@ -2,9 +2,12 @@ import style from "./autocomplete.module.css";
 
 import type { AutocompleteResultsProps } from "components/Pages/Share/AutocompleteTag/types";
 
-//TODO: add loading state
 export default function AutocompleteResults(props: AutocompleteResultsProps) {
-  const { onSelect, results } = props;
+  const { onSelect, results, loading, querySearch } = props;
+
+  const addTag = () => {
+    console.log({ querySearch });
+  };
 
   return (
     <ul className={style.list}>
@@ -20,11 +23,24 @@ export default function AutocompleteResults(props: AutocompleteResultsProps) {
           </span>
         </li>
       ))}
-      {results.length === 0 && (
+      {results.length === 0 && !loading && (
+        <li>
+          <button className={style.item} onClick={addTag} type="button">
+            <p>
+              Presiona
+              <strong> Enter </strong>o has
+              <strong> Click </strong>
+              para agregar
+              <span className="font-i">{` ${querySearch}`}</span>
+            </p>
+          </button>
+        </li>
+      )}
+      {loading && (
         <li className={style.item}>
-          <span>No hay resultados </span>
-          <span className={style.icon_check}>
-            <i className="uil uil-silent-squint"></i>
+          <span>Cargando ...</span>
+          <span className={style.icon_loading}>
+            <i className="uil uil-spinner"></i>
           </span>
         </li>
       )}

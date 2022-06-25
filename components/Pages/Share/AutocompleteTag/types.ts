@@ -14,6 +14,8 @@ export type AutocompleteResultsProps = {
   onSelect: ItemCallback;
   selected: AutocompleteItem[];
   results: AutocompleteItem[];
+  loading: boolean;
+  querySearch: string;
 };
 
 export type AutocompleteOutputProps = {
