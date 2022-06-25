@@ -19,3 +19,19 @@ export async function search(
     return [null, message];
   }
 }
+
+export async function create(
+  name: string
+): Promise<[Tag | null, string | null]> {
+  try {
+    await dbConnect();
+
+    const tag = new TagModel({ name });
+    await tag.save();
+
+    return [tag, null];
+  } catch (error) {
+    const message = (error as Error)?.message || "Something went wrong";
+    return [null, message];
+  }
+}

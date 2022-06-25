@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-import { search } from "controllers/tags";
+import { search, create } from "controllers/tags";
 
 export default async function handler(
   req: NextApiRequest,
@@ -8,7 +8,12 @@ export default async function handler(
 ) {
   const { method } = req;
   if (method === "POST") {
-    return res.status(200).json({});
+    const { name } = req.query;
+    const [tag, error] = await create(name.toString());
+    if (error || !tag) {
+      res.status(500).json({ error });
+    }
+    res.status(200).json(tag);
   }
   if (method === "GET") {
     const { name } = req.query;
