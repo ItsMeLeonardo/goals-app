@@ -20,17 +20,9 @@ export async function create(postBody: PostDto, image: File) {
 
   const { data } = await axios.post<Post>("/api/posts", postFormData, config);
   return data;
-  /*   const response = await fetch("/api/posts", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(postBody),
-  });
-  if (!response.ok) {
-    const error = await response.text();
-    return [null, error];
-  }
-  const post = await response.json();
-  return [post, null]; */
+}
+
+export async function getAll() {
+  const { data } = await axios.get<Post[]>("/api/posts");
+  return data;
 }
