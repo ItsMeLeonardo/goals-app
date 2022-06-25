@@ -52,6 +52,7 @@ export default function Autocomplete() {
 
   useEffect(() => {
     try {
+      if (inputValue.length < 2) return;
       setSearchLoading(true);
       debouncedSearched(inputValue, (tagsResults) => {
         let tagsFormatted = tagsResults;
@@ -67,9 +68,9 @@ export default function Autocomplete() {
           });
         }
         setResults(tagsFormatted);
+        setSearchLoading(false);
       });
     } catch (error) {
-    } finally {
       setSearchLoading(false);
     }
   }, [inputValue, tagsSelected]);

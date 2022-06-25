@@ -52,8 +52,11 @@
     transform: rotate(360deg);
   }
 }
-
+.icon_loading {
+  height: 1rem;
+}
 .icon_loading i {
+  font-size: 1.5rem;
   animation: loading 1s linear infinite;
 }
 

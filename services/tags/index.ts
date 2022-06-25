@@ -21,3 +21,18 @@ export async function search(
     return null;
   }
 }
+
+export async function create(
+  nameTag: string
+): Promise<RequestCall<Tag> | null> {
+  try {
+    const controller = getCallController();
+
+    const url = `tags?name=${nameTag}`;
+    const { data } = await api.post<Tag>(url);
+
+    return { data, controller };
+  } catch (error) {
+    return null;
+  }
+}
