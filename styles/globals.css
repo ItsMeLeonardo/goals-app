@@ -66,6 +66,11 @@ body[data-theme="dark"] {
   outline-offset: 0.25rem;
   border-radius: 0.25rem;
 }
+
+.font-i {
+  font-style: italic;
+}
+
 /* width */
 ::-webkit-scrollbar {
   --size: 0.35rem;
