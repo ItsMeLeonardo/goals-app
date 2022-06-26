@@ -8,6 +8,7 @@ export type User = {
   avatar: string;
   posts?: Post[];
   postsSaved?: Post[];
+  _id?: string | Schema.Types.ObjectId;
 };
 
 const userSchema = new Schema<User, Model<User>>(

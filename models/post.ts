@@ -12,6 +12,7 @@ export type Post = {
   tags: Tag[];
   id: string | Schema.Types.ObjectId;
   thumbnail: string;
+  _id?: string | Schema.Types.ObjectId;
 };
 
 const postSchema = new Schema<Post, Model<Post>>(

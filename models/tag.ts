@@ -3,6 +3,7 @@ import mongoose, { Schema, model, Model } from "mongoose";
 export type Tag = {
   id: string | Schema.Types.ObjectId;
   name: string;
+  _id?: string | Schema.Types.ObjectId;
 };
 
 const tagSchema = new Schema<Tag, Model<Tag>>({
