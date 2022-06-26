@@ -37,3 +37,56 @@ export async function getAll(): Promise<[Post[] | null, string | null]> {
     return [null, "Something went wrong to get posts"];
   }
 }
+
+export async function find(title = "_", tagName = "_") {
+  try {
+    await dbConnect();
+
+    const posts = await PostModel.aggregate([
+      {
+        $lookup: {
+          from: "tags",
+          localField: "tags",
+          foreignField: "_id",
+          as: "tags",
+        },
+      },
+      {
+        $match: {
+          $or: [
+            {
+              "tags.name": {
+                $regex: tagName,
+                $options: "i",
+              },
+            },
+            {
+              title: {
+                $regex: title,
+                $options: "i",
+              },
+            },
+          ],
+        },
+      },
+      {
+        $lookup: {
+          from: "users",
+          localField: "user",
+          foreignField: "_id",
+          as: "user",
+        },
+      },
+      {
+        $unwind: {
+          path: "$user",
+          preserveNullAndEmptyArrays: false,
+        },
+      },
+    ]);
+
+    return [posts, null];
+  } catch (error) {
+    return [null, "Something went wrong to get posts"];
+  }
+}
