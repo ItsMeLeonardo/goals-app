@@ -2,12 +2,17 @@ import FeedHeader from "components/Feed/FeedHeader";
 import FeedBody from "components/Feed/FeedBody";
 import FeedFooter from "components/Feed/FeedFooter";
 
-export default function Feed() {
+import type { Post } from "models/post";
+
+export default function Feed(props: Post) {
+  const { user, thumbnail, title, tags, url } = props;
   return (
-    <aside className="feed">
-      <FeedHeader />
-      <FeedBody />
-      <FeedFooter />
+    <aside className="feed-link-container">
+      <a className="feed" target="_blank" href={url} rel="noreferrer">
+        <FeedHeader avatar={user.avatar} username={user.username} />
+        <FeedBody thumbnail={thumbnail} />
+        <FeedFooter tags={tags} title={title} />
+      </a>
     </aside>
   );
 }

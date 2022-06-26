@@ -1,16 +1,23 @@
-const tags = ["React", "Next.js", "TypeScript", "Node.js", "Express"];
+import { Tag } from "models/tag";
 
-export default function FeedFooter() {
+type Props = {
+  title: string;
+  tags: Tag[];
+};
+
+// const tags = ["React", "Next.js", "TypeScript", "Node.js", "Express"];
+
+export default function FeedFooter({ title, tags }: Props) {
   return (
     <footer className="feed-footer">
       <div className="feed-caption">
-        <h3 className="feed-title">Aprende como crear una App con NextJS</h3>
+        <h3 className="feed-title">{title}</h3>
       </div>
 
       <ul className="feed-tag-list">
         {tags.map((tag) => (
-          <li className="feed-tag" key={tag}>
-            <span className="feed-tag-text">#{tag}</span>
+          <li className="feed-tag" key={tag.id.toString()}>
+            <span className="feed-tag-text">#{tag.name}</span>
           </li>
         ))}
       </ul>
