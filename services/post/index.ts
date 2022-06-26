@@ -22,7 +22,9 @@ export async function create(postBody: PostDto, image: File) {
   return data;
 }
 
-export async function getAll() {
-  const { data } = await axios.get<Post[]>("/api/posts");
+export async function getAll({ fullUrl = false } = {}) {
+  const domainUrl = process.env.DOMAIN || "";
+  const url = fullUrl ? `${domainUrl}/api/posts` : "/api/posts";
+  const { data } = await axios.get<Post[]>(url);
   return data;
 }
