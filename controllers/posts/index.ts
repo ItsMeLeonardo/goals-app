@@ -38,7 +38,7 @@ export async function getAll(): Promise<[Post[] | null, string | null]> {
   }
 }
 
-export async function find(title = "_", tagName = "_") {
+export async function find(title: string, tagName?: string) {
   try {
     await dbConnect();
 
@@ -56,7 +56,7 @@ export async function find(title = "_", tagName = "_") {
           $or: [
             {
               "tags.name": {
-                $regex: tagName,
+                $regex: tagName || title,
                 $options: "i",
               },
             },
