@@ -1,10 +1,8 @@
 import nc from "next-connect";
-import { mongo } from "mongoose";
 import multer from "multer";
 
 import saveImage from "controllers/posts/middleware/saveImage";
-// import { uploadImage } from "lib/mediaFileCloud";
-import { create } from "controllers/posts";
+import { create, getAll } from "controllers/posts";
 
 import type { NextApiResponse } from "next";
 import type { FileRequest } from "controllers/posts/type";
@@ -54,6 +52,14 @@ handler.post(async (req, res) => {
   }
 
   res.status(200).json(post);
+});
+
+handler.get(async (req, res) => {
+  const [posts, error] = await getAll();
+  if (error || !posts) {
+    return res.status(500).json({ error });
+  }
+  res.status(200).json(posts);
 });
 
 export default handler;
