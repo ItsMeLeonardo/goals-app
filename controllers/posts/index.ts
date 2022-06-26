@@ -38,6 +38,30 @@ export async function getAll(): Promise<[Post[] | null, string | null]> {
   }
 }
 
+const hydratePost = (posts: Post[]) => {
+  /**
+   * this is a solution until mongoose support deep hydration
+   */
+  return posts.map((post) => {
+    const tags = post.tags.map((tag) => {
+      return {
+        name: tag.name,
+        id: tag._id,
+      };
+    });
+    const user = {
+      ...post.user,
+      id: post.user._id,
+    };
+    return {
+      ...post,
+      tags,
+      user,
+      id: post._id,
+    };
+  });
+};
+
 export async function find(title: string, tagName?: string) {
   try {
     await dbConnect();
@@ -84,9 +108,10 @@ export async function find(title: string, tagName?: string) {
         },
       },
     ]);
-
-    return [posts, null];
+    const hydratedPosts = hydratePost(posts);
+    return [hydratedPosts, null];
   } catch (error) {
+    console.error({ error });
     return [null, "Something went wrong to get posts"];
   }
 }
