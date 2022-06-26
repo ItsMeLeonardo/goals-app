@@ -449,6 +449,7 @@ main .container {
   margin: 1rem 0;
   font-size: 0.85rem;
   line-height: 1.5;
+  display: block;
 }
 .feed-head {
   display: flex;
