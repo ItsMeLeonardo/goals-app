@@ -1,15 +1,15 @@
 import styles from "./post.module.css";
+
 import Post from "components/Post";
 
-export default function PostList() {
+import type { Post as TypePost } from "models/post";
+
+export default function PostList({ posts }: { posts: TypePost[] }) {
   return (
     <ul className={styles.result_list}>
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {posts.map((post) => (
+        <Post {...post} key={post.id.toString()} />
+      ))}
     </ul>
   );
 }

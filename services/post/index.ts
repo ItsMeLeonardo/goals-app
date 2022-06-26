@@ -1,5 +1,7 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+import { api } from "services/api";
+
 import type { PostDto } from "controllers/posts/dto";
 import type { Post } from "models/post";
 
@@ -26,5 +28,14 @@ export async function getAll({ fullUrl = false } = {}) {
   const domainUrl = process.env.DOMAIN || "";
   const url = fullUrl ? `${domainUrl}/api/posts` : "/api/posts";
   const { data } = await axios.get<Post[]>(url);
+  return data;
+}
+
+export async function search(titleQuery: string, tagNameQuery?: string) {
+  const title = encodeURI(titleQuery);
+  const tagName = encodeURI(tagNameQuery || "");
+  const url = `/posts/${title}/${tagName}`;
+
+  const { data } = await api.get<Post[]>(url);
   return data;
 }
