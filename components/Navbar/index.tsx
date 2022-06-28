@@ -1,6 +1,7 @@
 import NextLink from "next/link";
 
 import NavbarRightContent from "components/Navbar/NavbarRightContent";
+import SearchBar from "components/Navbar/SearchBar";
 
 export default function Layout() {
   return (
@@ -11,16 +12,8 @@ export default function Layout() {
             <h2 className="logo">Juntos_</h2>
           </a>
         </NextLink>
-        <label className="search-bar">
-          <i className="uil uil-search"></i>
-          <input
-            className="search-input"
-            type="search"
-            name="search"
-            id="search"
-            placeholder="Busca por creadores, proyectos o temas"
-          />
-        </label>
+        <SearchBar />
+
         <div className="create">
           <NavbarRightContent />
         </div>
