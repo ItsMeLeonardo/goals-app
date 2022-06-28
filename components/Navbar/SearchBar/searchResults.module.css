@@ -39,7 +39,7 @@
 .item_title {
   white-space: nowrap;
   text-overflow: ellipsis;
-  max-width: 21ch;
+  max-width: 100%;
   overflow: hidden;
   font-weight: 600;
 }
