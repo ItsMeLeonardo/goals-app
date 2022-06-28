@@ -17,6 +17,13 @@
   height: 210px;
   overflow: hidden;
   cursor: pointer;
+  z-index: 5;
+  transition: box-shadow 0.3s ease-in, z-index 0.3s ease-in;
+  position: relative;
+}
+.result_item:hover {
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  z-index: 10;
 }
 
 .result_body {
