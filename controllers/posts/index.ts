@@ -29,6 +29,8 @@ export async function getAll(): Promise<[Post[] | null, string | null]> {
   try {
     await dbConnect();
     const posts = (await PostModel.find()
+      .sort("-createdAt")
+      .limit(10)
       .populate<{ tags: Tag[] }>("tags")
       .populate<{ user: User }>("user")) as Post[];
 
