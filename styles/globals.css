@@ -10,6 +10,7 @@
   --color-light: hsl(252, 30%, var(--light-color-lightness));
   --color-gray: hsl(252, 15%, 65%);
   --color-primary: hsl(252, 75%, 60%);
+  --color-primary-pale: hsla(252, 75%, 60%, 0.2);
   --color-secondary: hsl(252, 100%, 90%);
   --color-success: hsl(120, 95%, 65%);
   --color-danger: hsl(0, 95%, 65%);
@@ -98,8 +99,10 @@ img {
 picture {
   display: block;
 }
+
+a,
 a:visited {
-  color: initial;
+  color: var(--color-primary);
 }
 
 .container {
@@ -196,16 +199,21 @@ a:visited {
   justify-content: space-between;
 }
 .search-bar {
+  width: 30vw;
+  max-width: 450px;
   background: var(--color-light);
   border-radius: var(--radius);
   padding: var(--search-padding);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
 }
 .search-input {
-  width: 30vw;
   background: transparent;
   font-size: 0.9rem;
   color: var(--color-dark);
-  margin-left: 1rem;
+  width: 100%;
 }
 .search-input::placeholder {
   color: var(--color-gray);
