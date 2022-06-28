@@ -1,8 +1,9 @@
-import styles from "./post.module.css";
-
-import type { Post } from "models/post";
+import TagList from "components/Tag/TagList";
 
 import Avatar from "components/Avatar";
+import type { Post } from "models/post";
+
+import styles from "./post.module.css";
 
 export default function Post(props: Post) {
   const { user, tags, title, thumbnail, url } = props;
@@ -32,13 +33,7 @@ export default function Post(props: Post) {
           consequatur sunt temporibus sint voluptate consequuntur necessitatibus
           quasi. Repellat sint sequi rem.
         </p> */}
-          <ul className="feed-tag-list">
-            {tags.map((tag) => (
-              <li className="feed-tag" key={tag.id.toString()}>
-                <span className="feed-tag-text">#{tag.name}</span>
-              </li>
-            ))}
-          </ul>
+          <TagList tags={tags} />
         </aside>
         <picture className={styles.result_thumbnail}>
           <img src={thumbnail} alt={title} />

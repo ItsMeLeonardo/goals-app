@@ -1,3 +1,5 @@
+import TagList from "components/Tag/TagList";
+
 import { Tag } from "models/tag";
 
 type Props = {
@@ -14,13 +16,7 @@ export default function FeedFooter({ title, tags }: Props) {
         <h3 className="feed-title">{title}</h3>
       </div>
 
-      <ul className="feed-tag-list">
-        {tags.map((tag) => (
-          <li className="feed-tag" key={tag.id.toString()}>
-            <span className="feed-tag-text">#{tag.name}</span>
-          </li>
-        ))}
-      </ul>
+      <TagList tags={tags} />
 
       {/*             <div className="feed-likeBy">
 <picture className="likeBy-photo">
