@@ -199,7 +199,7 @@ a:visited {
   justify-content: space-between;
 }
 .search-bar {
-  width: 30vw;
+  width: 100%;
   max-width: 450px;
   background: var(--color-light);
   border-radius: var(--radius);
