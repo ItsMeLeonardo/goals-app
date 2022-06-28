@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "avvvatars-react": "^0.4.2",
     "axios": "^0.27.2",
     "cloudinary": "^1.30.0",
     "mongoose": "^6.3.4",

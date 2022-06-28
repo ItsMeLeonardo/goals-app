@@ -1,4 +1,4 @@
-import { User } from "models/user";
+import Avatar from "components/Avatar";
 
 type Props = {
   username: string;
@@ -10,7 +10,7 @@ export default function FeedHeader({ username, avatar }: Props) {
     <header className="feed-head">
       <div className="feed-user">
         <picture className="profile-photo">
-          <img src={avatar} alt={username} />
+          <Avatar src={avatar} alt={username} />
         </picture>
         <div className="feed-user-info">
           <h3 className="feed-username">{username}</h3>

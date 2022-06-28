@@ -2,6 +2,8 @@ import styles from "./post.module.css";
 
 import type { Post } from "models/post";
 
+import Avatar from "components/Avatar";
+
 export default function Post(props: Post) {
   const { user, tags, title, thumbnail, url } = props;
   return (
@@ -15,7 +17,7 @@ export default function Post(props: Post) {
         <aside className={styles.result_body}>
           <div className={styles.result_user}>
             <picture className={styles.result_user_photo}>
-              <img src={user.avatar} alt={user.username} />
+              <Avatar src={user.avatar} alt={user.username} />
             </picture>
             <h4 className={styles.result_username}>
               <span>{user.username}</span>

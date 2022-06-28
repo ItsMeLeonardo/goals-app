@@ -1,6 +1,8 @@
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 
+import Avatar from "components/Avatar";
+
 import { linksList } from "components/Sidebar/utils";
 
 import { useUser } from "hooks/useUser";
@@ -16,7 +18,7 @@ export default function Sidebar() {
     <>
       <a href="" className="profile-link">
         <picture className="profile-photo">
-          <img src={user?.image || ""} alt="profile 1" />
+          <Avatar src={user?.image || ""} alt="profile 1" />
         </picture>
         <div className="handle">
           <h4>{user?.name}</h4>

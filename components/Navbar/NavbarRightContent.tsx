@@ -2,6 +2,7 @@ import { ChangeEvent } from "react";
 import NextLink from "next/link";
 
 import Tooltip from "components/Tooltip";
+import Avatar from "components/Avatar";
 
 //utils
 import { useUser } from "hooks/useUser";
@@ -40,7 +41,10 @@ export default function NavbarRightContent() {
 
           <Tooltip content={<UserOptions />}>
             <picture className="profile-photo">
-              <img src={user.user?.image || ""} alt={user.user?.name || ""} />
+              <Avatar
+                src={user.user?.image || ""}
+                alt={user.user?.name || ""}
+              />
             </picture>
           </Tooltip>
         </>
