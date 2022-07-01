@@ -2,7 +2,7 @@ import Tag from "components/Tag";
 
 import type { Tag as TypeTag } from "models/tag";
 
-import style from "components/Tag/Tag.module.css";
+import style from "components/Tag/tag.module.css";
 
 export default function TagList({ tags }: { tags: TypeTag[] }) {
   return (

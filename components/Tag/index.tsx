@@ -1,4 +1,4 @@
-import style from "components/Tag/Tag.module.css";
+import style from "components/Tag/tag.module.css";
 
 export default function Tag({ text }: { text: string }) {
   return (
