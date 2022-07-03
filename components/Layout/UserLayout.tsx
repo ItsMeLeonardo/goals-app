@@ -18,9 +18,7 @@ export default function UserLayout({ children }: Props) {
 
         <section className="middle">{children}</section>
 
-        <section className="right">
-          <RightContent />
-        </section>
+        <section className="right">{/* <RightContent /> */}</section>
       </div>
     </MainLayout>
   );

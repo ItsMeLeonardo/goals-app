@@ -15,7 +15,7 @@ export default function Home({ fallback }: { fallback: Post[] }) {
   return (
     <>
       <SWRConfig value={{ fallback }}>
-        <Stories />
+        {/* <Stories /> */}
 
         <div className="create-post-form">
           <picture className="profile-photo">
