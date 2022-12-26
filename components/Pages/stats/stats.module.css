@@ -1,0 +1,33 @@
+.stats_container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.chart_container,
+.chart_container_main {
+  border-radius: var(--card-radius);
+  padding: 0.5em;
+  height: 200px;
+  overflow: auto;
+}
+.chart_container {
+  background: var(--color-white);
+}
+.chart_container_main {
+  background: var(--color-white);
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .stats_container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .chart_container_main {
+    grid-column: span 2;
+    height: 300px;
+  }
+}
