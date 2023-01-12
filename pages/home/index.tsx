@@ -11,8 +11,14 @@ import type { Post } from 'models/post'
 // services
 import { getAll } from 'services/post'
 import { NextSeo } from 'next-seo'
+import { useUser } from 'hooks/useUser'
+import Avatar from 'components/Avatar'
 
 export default function Home({ fallback }: { fallback: Post[] }) {
+	const { user } = useUser()
+
+	if (!user) return null
+
 	return (
 		<>
 			<NextSeo title="Juntos | Home" />
@@ -21,14 +27,11 @@ export default function Home({ fallback }: { fallback: Post[] }) {
 
 				<div className="create-post-form">
 					<picture className="profile-photo">
-						<img
-							src="https://images.unsplash.com/photo-1651868722945-fab942eaaec5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
-							alt=""
-						/>
+						<Avatar src={user.user?.image || ''} alt={user.user?.name || ''} />
 					</picture>
 					<input
 						type="text"
-						placeholder="¿Qué tienes en mente ${username}?"
+						placeholder={`¿Qué tienes en mente?`}
 						id="create-post"
 						className="create-post-input"
 						autoComplete="off"
