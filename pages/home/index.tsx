@@ -10,10 +10,12 @@ import type { Post } from 'models/post'
 
 // services
 import { getAll } from 'services/post'
+import { NextSeo } from 'next-seo'
 
 export default function Home({ fallback }: { fallback: Post[] }) {
 	return (
 		<>
+			<NextSeo title="Juntos | Home" />
 			<SWRConfig value={{ fallback }}>
 				{/* <Stories /> */}
 

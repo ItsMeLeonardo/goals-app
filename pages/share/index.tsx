@@ -1,7 +1,13 @@
-import FormShare from "components/Pages/Share";
+import FormShare from 'components/Pages/Share'
+import { NextSeo } from 'next-seo'
 
 export default function Share() {
-  return <FormShare />;
+	return (
+		<>
+			<NextSeo title="Create Post" />
+			<FormShare />
+		</>
+	)
 }
 
-Share.requireAuth = true;
+Share.requireAuth = true

@@ -1,9 +1,13 @@
-/* import ComingSoon from "components/ComingSoon";
-
-import PostList from "components/Post/PostList";
- */
+import { NextSeo } from 'next-seo'
 export default function Saved() {
-	return <div>{/* <PostList /> */}</div>
+	return (
+		<>
+			<NextSeo title="My list" />
+			<div>
+				<h1>Hello world</h1>
+			</div>
+		</>
+	)
 }
 
 Saved.requireAuth = true

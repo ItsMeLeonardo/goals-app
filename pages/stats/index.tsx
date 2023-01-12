@@ -8,6 +8,7 @@ import style from 'components/Pages/stats/stats.module.css'
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title } from 'chart.js'
 
 import { getPrimaryGradient } from 'utils/canvasGradient/primary'
+import { NextSeo } from 'next-seo'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title)
 
@@ -88,13 +89,16 @@ export default function Stats() {
 	}, [])
 
 	return (
-		<section className={style.stats_container}>
-			<aside className={style.chart_container_main}>
-				<Bar ref={postByTagCharRef} data={postsByTagsData} options={options} />
-			</aside>
-			<aside className={style.chart_container}></aside>
-			<aside className={style.chart_container}></aside>
-		</section>
+		<>
+			<NextSeo title="Stats" />
+			<section className={style.stats_container}>
+				<aside className={style.chart_container_main}>
+					<Bar ref={postByTagCharRef} data={postsByTagsData} options={options} />
+				</aside>
+				<aside className={style.chart_container}></aside>
+				<aside className={style.chart_container}></aside>
+			</section>
+		</>
 	)
 }
 

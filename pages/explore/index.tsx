@@ -1,11 +1,13 @@
-import ExploreBody from "components/Explore";
+import ExploreBody from 'components/Explore'
+import { NextSeo } from 'next-seo'
 
 export default function Explore() {
-  return (
-    <>
-      <ExploreBody />
-    </>
-  );
+	return (
+		<>
+			<NextSeo title="Find projects" />
+			<ExploreBody />
+		</>
+	)
 }
 
-Explore.requireAuth = true;
+Explore.requireAuth = true
