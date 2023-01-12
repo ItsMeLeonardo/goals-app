@@ -1,53 +1,55 @@
-import { useState, createContext, ReactNode } from "react";
+import { useState, createContext, ReactNode } from 'react'
 
 //types
 interface Props {
-  children: ReactNode;
+	children: ReactNode
 }
 
 type User = {
-  id: string;
-  name: string;
-  email: string;
-  avatar: string;
-};
+	id: string
+	name: string
+	email: string
+	avatar: string
+}
+
+type VoidFunction = () => void
 
 type AuthContextType = {
-  user?: User | null;
-  login: (user: User, cb: VoidFunction) => void;
-  logout: (cb: VoidFunction) => void;
-};
+	user?: User | null
+	login: (user: User, cb: VoidFunction) => void
+	logout: (cb: VoidFunction) => void
+}
 
 export const AuthContext = createContext<AuthContextType>({
-  login: () => {},
-  logout: () => {},
-});
+	login: () => {},
+	logout: () => {},
+})
 
 const defaultUser: User = {
-  id: "",
-  name: "",
-  email: "",
-  avatar: "",
-};
+	id: '',
+	name: '',
+	email: '',
+	avatar: '',
+}
 
 export function AuthProvider({ children }: Props) {
-  const [user, setUser] = useState<User | null>(null);
+	const [user, setUser] = useState<User | null>(null)
 
-  const login = (user: User, cb: VoidFunction) => {
-    setUser(user);
-    cb();
-  };
+	const login = (user: User, cb: VoidFunction) => {
+		setUser(user)
+		cb()
+	}
 
-  const logout = (cb: VoidFunction) => {
-    setUser(null);
-    cb();
-  };
+	const logout = (cb: VoidFunction) => {
+		setUser(null)
+		cb()
+	}
 
-  const value = {
-    user,
-    login,
-    logout,
-  };
+	const value = {
+		user,
+		login,
+		logout,
+	}
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }

@@ -1,18 +1,18 @@
-import mongoose from "mongoose";
-import type { ConnectOptions } from "mongoose";
-import type { dbConnectionCache } from "lib/dbConnect/type";
+/* eslint-disable no-var */
+import mongoose from 'mongoose'
+import type { ConnectOptions } from 'mongoose'
+import type { dbConnectionCache } from 'lib/dbConnect/type'
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI
 
-const errorMessage =
-  "Please define the MONGODB_URI environment variable inside .env.local";
+const errorMessage = 'Please define the MONGODB_URI environment variable inside .env.local'
 
 if (!MONGODB_URI) {
-  throw new Error(errorMessage);
+	throw new Error(errorMessage)
 }
 
 declare global {
-  var mongoose: dbConnectionCache;
+	var mongoose: dbConnectionCache
 }
 
 /**
@@ -20,32 +20,33 @@ declare global {
  * in development. This prevents connections growing exponentially
  * during API Route usage.
  */
-let cached: dbConnectionCache = global.mongoose!;
+// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+let cached: dbConnectionCache = global.mongoose!
 
 if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
+	cached = global.mongoose = { conn: null, promise: null }
 }
 
 async function dbConnect() {
-  if (!MONGODB_URI) {
-    throw new Error(errorMessage);
-  }
+	if (!MONGODB_URI) {
+		throw new Error(errorMessage)
+	}
 
-  if (cached.conn) {
-    return cached.conn;
-  }
+	if (cached.conn) {
+		return cached.conn
+	}
 
-  if (!cached.promise) {
-    const opts: ConnectOptions = {
-      bufferCommands: false,
-    };
+	if (!cached.promise) {
+		const opts: ConnectOptions = {
+			bufferCommands: false,
+		}
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      return mongoose;
-    });
-  }
-  cached.conn = await cached.promise;
-  return cached.conn;
+		cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+			return mongoose
+		})
+	}
+	cached.conn = await cached.promise
+	return cached.conn
 }
 
-export default dbConnect;
+export default dbConnect
