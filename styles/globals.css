@@ -201,9 +201,9 @@ a:visited {
 }
 
 .navbar .container {
-	display: flex;
+	display: grid;
+	grid-template-columns: 0.25fr 1fr 0.25fr;
 	align-items: center;
-	justify-content: space-between;
 }
 .search-bar {
 	width: 100%;
