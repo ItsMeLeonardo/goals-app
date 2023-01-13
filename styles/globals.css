@@ -27,7 +27,9 @@
 	--card-padding: 1rem;
 
 	--sticky-top-sidebar: 5.4rem;
-	--sticky-top-right: -18rem;
+	/* --sticky-top-right: -18rem; */
+
+	--navbar-height: 70px;
 }
 
 *,
@@ -191,6 +193,7 @@ a:visited {
 .navbar {
 	width: 100vw;
 	background: var(--color-white);
+	height: var(--navbar-height);
 	position: fixed;
 	padding: 0.7rem 0;
 	top: 0;
@@ -582,7 +585,7 @@ main .container {
 .right {
 	height: max-content;
 	position: sticky;
-	top: var(--sticky-top-right);
+	top: calc(var(--navbar-height) + 1rem);
 	bottom: 0;
 }
 
