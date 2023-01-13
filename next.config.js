@@ -6,7 +6,12 @@ const nextConfig = {
 		defaultLocale: 'es',
 	},
 	images: {
-		domains: ['avatars.githubusercontent.com', 'images.unsplash.com', 'lh3.googleusercontent.com'],
+		domains: [
+			'avatars.githubusercontent.com',
+			'images.unsplash.com',
+			'lh3.googleusercontent.com',
+			'res.cloudinary.com',
+		],
 	},
 }
 

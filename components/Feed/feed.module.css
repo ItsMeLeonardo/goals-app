@@ -1,3 +1,33 @@
+.feed {
+	background: var(--color-white);
+	border-radius: var(--card-radius);
+	padding: var(--card-padding);
+	margin: 1rem 0;
+	font-size: 0.85rem;
+	line-height: 1.5;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.feed_body {
+	cursor: pointer;
+	height: 300px;
+
+	.feed_image {
+		border-radius: var(--card-radius);
+		height: 100%;
+		width: 100%;
+
+		* {
+			all: inherit;
+			object-fit: cover;
+			height: 100% !important;
+			width: 100% !important;
+		}
+	}
+}
+
 .feed_head {
 	display: flex;
 	justify-content: space-between;
