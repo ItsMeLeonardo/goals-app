@@ -470,6 +470,7 @@ main .container {
 .feed-head {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .feed-user {

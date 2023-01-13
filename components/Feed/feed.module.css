@@ -1,0 +1,15 @@
+.feed_head {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	.feed_user {
+		display: flex;
+		gap: 1rem;
+
+		.time {
+			color: var(--color-gray);
+			font-weight: 500;
+		}
+	}
+}
