@@ -1,0 +1,35 @@
+.container {
+	width: 100%;
+	position: relative;
+	margin-top: 1rem;
+	display: flex;
+
+	.avatar {
+		position: absolute;
+		top: 0;
+		left: 1rem;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		align-items: center;
+	}
+
+	.button {
+		position: absolute;
+		top: 0;
+		right: 1rem;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		align-items: center;
+	}
+
+	.input {
+		background: var(--color-white);
+		padding: calc(var(--card-padding) * 1.5);
+		padding-left: calc(var(--card-padding) * 5);
+		border-radius: var(--card-radius);
+		color: var(--color-dark);
+		width: 100%;
+	}
+}

@@ -11,34 +11,17 @@ import type { Post } from 'models/post'
 // services
 import { getAll } from 'services/post'
 import { NextSeo } from 'next-seo'
-import { useUser } from 'hooks/useUser'
-import Avatar from 'components/Avatar'
+import CreateFormPost from 'components/Shared/CreateFormPost'
 // import Stories from 'components/Story/Stories'
 
 export default function Home({ fallback }: { fallback: Post[] }) {
-	const { user } = useUser()
-
-	if (!user) return null
-
 	return (
 		<>
 			<NextSeo title="Juntos | Home" />
 			<SWRConfig value={{ fallback }}>
 				{/* <Stories /> */}
 
-				<div className="create-post-form">
-					<Avatar src={user.user?.image || ''} alt={user.user?.name || ''} size="md" />
-					<input
-						type="text"
-						placeholder={`¿Qué tienes en mente?`}
-						id="create-post"
-						className="create-post-input"
-						autoComplete="off"
-					/>
-					<NextLink href="/share">
-						<a className="btn primary">Crear</a>
-					</NextLink>
-				</div>
+				<CreateFormPost />
 				<FeedList />
 			</SWRConfig>
 		</>
