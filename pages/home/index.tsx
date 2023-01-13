@@ -11,7 +11,7 @@ import type { Post } from 'models/post'
 // services
 import { getAll } from 'services/post'
 import { NextSeo } from 'next-seo'
-import CreateFormPost from 'components/Shared/CreateFormPost'
+import CreateFormPost from 'components/shared/CreateFormPost'
 // import Stories from 'components/Story/Stories'
 
 export default function Home({ fallback }: { fallback: Post[] }) {
