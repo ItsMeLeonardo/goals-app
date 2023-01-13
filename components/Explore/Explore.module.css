@@ -1,33 +1,67 @@
 .form {
-  width: 100%;
+	width: 100%;
 }
 
 .search {
-  background: var(--color-white);
-  display: flex;
-  border-radius: var(--card-radius);
-  padding: var(--card-padding);
-  width: 100%;
-  font-weight: 500;
-  margin: 0.75rem 0;
-  color: var(--color-dark);
+	background: var(--color-white);
+	display: flex;
+	border-radius: var(--card-radius);
+	padding: var(--card-padding);
+	width: 100%;
+	font-weight: 500;
+	margin: 0.75rem 0;
+	color: var(--color-dark);
 }
 
 .category_list {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
 }
 
 .category {
-  cursor: pointer;
-  border-radius: 2rem;
-  background: var(--color-white);
-  font-size: 0.85rem;
-  padding: 0.5rem 1em;
+	cursor: pointer;
+	border-radius: 2rem;
+	background: var(--color-white);
+	font-size: 0.85rem;
+	padding: 0.5rem 1em;
 }
 
 .category_input:checked ~ .category {
-  background: var(--color-primary);
-  color: white;
+	background: var(--color-primary);
+	color: white;
+}
+
+.inputContainer {
+	display: flex;
+	flex: 1;
+	gap: 0.5rem;
+	align-items: center;
+	position: relative;
+
+	.loader {
+		position: absolute;
+		right: 1rem;
+	}
+}
+
+.loader {
+	--size: 2rem;
+	width: var(--size);
+	height: var(--size);
+	border-radius: 50%;
+	display: inline-block;
+	border-top: 3px solid var(--color-primary);
+	border-right: 3px solid transparent;
+	box-sizing: border-box;
+	animation: rotation 0.75s linear infinite;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
 }
