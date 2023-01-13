@@ -9,9 +9,7 @@ export default function FeedHeader({ username, avatar }: Props) {
 	return (
 		<header className="feed-head">
 			<div className="feed-user">
-				<picture className="profile-photo">
-					<Avatar src={avatar} alt={username} />
-				</picture>
+				<Avatar src={avatar} alt={username} size="md" />
 				<div className="feed-user-info">
 					<h3 className="feed-username">{username}</h3>
 					<small className="feed-user-location">Programación, hace 15 min</small>

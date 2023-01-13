@@ -1,11 +1,10 @@
+import Avatar from 'components/Avatar'
 import type { StoryProps } from 'components/Story/type'
 
 export default function Story({ username, project_poster, profile }: StoryProps) {
 	return (
 		<li className="story" style={{ backgroundImage: `url(${project_poster})` }}>
-			<picture className="profile-photo">
-				<img src={profile} alt={username} />
-			</picture>
+			<Avatar src={profile} alt={username} />
 			<p className="story-name">{username}</p>
 		</li>
 	)

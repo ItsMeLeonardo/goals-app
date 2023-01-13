@@ -13,6 +13,7 @@ import { getAll } from 'services/post'
 import { NextSeo } from 'next-seo'
 import { useUser } from 'hooks/useUser'
 import Avatar from 'components/Avatar'
+// import Stories from 'components/Story/Stories'
 
 export default function Home({ fallback }: { fallback: Post[] }) {
 	const { user } = useUser()
@@ -26,9 +27,7 @@ export default function Home({ fallback }: { fallback: Post[] }) {
 				{/* <Stories /> */}
 
 				<div className="create-post-form">
-					<picture className="profile-photo">
-						<Avatar src={user.user?.image || ''} alt={user.user?.name || ''} />
-					</picture>
+					<Avatar src={user.user?.image || ''} alt={user.user?.name || ''} size="md" />
 					<input
 						type="text"
 						placeholder={`¿Qué tienes en mente?`}

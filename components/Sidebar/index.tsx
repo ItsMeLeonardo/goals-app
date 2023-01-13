@@ -1,43 +1,41 @@
-import NextLink from "next/link";
-import { useRouter } from "next/router";
+import NextLink from 'next/link'
+import { useRouter } from 'next/router'
 
-import Avatar from "components/Avatar";
+import Avatar from 'components/Avatar'
 
-import { linksList } from "components/Sidebar/utils";
+import { linksList } from 'components/Sidebar/utils'
 
-import { useUser } from "hooks/useUser";
+import { useUser } from 'hooks/useUser'
 
 export default function Sidebar() {
-  const { user: userData } = useUser();
-  const router = useRouter();
-  const { pathname } = router;
+	const { user: userData } = useUser()
+	const router = useRouter()
+	const { pathname } = router
 
-  const user = userData?.user;
+	const user = userData?.user
 
-  return (
-    <>
-      <a href="" className="profile-link">
-        <picture className="profile-photo">
-          <Avatar src={user?.image || ""} alt="profile 1" />
-        </picture>
-        <div className="handle">
-          <h4>{user?.name}</h4>
-          <p className="text-muted text-sm">{user?.email}</p>
-        </div>
-      </a>
+	return (
+		<>
+			<a href="" className="profile-link">
+				<Avatar src={user?.image || ''} alt="profile 1" size="md" />
+				<div className="handle">
+					<h4>{user?.name}</h4>
+					<p className="text-muted text-sm">{user?.email}</p>
+				</div>
+			</a>
 
-      <aside className="sidebar">
-        {linksList.map(({ href, icon, label }) => (
-          <NextLink href={href} key={href}>
-            <a className={`menu-item ${href === pathname ? "active" : ""}`}>
-              {icon}
-              <span className="menu-item-text">{label}</span>
-            </a>
-          </NextLink>
-        ))}
-      </aside>
-    </>
-  );
+			<aside className="sidebar">
+				{linksList.map(({ href, icon, label }) => (
+					<NextLink href={href} key={href}>
+						<a className={`menu-item ${href === pathname ? 'active' : ''}`}>
+							{icon}
+							<span className="menu-item-text">{label}</span>
+						</a>
+					</NextLink>
+				))}
+			</aside>
+		</>
+	)
 }
 /*
 <a className="menu-item" id="notifications">

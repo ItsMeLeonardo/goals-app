@@ -40,9 +40,7 @@ export default function NavbarRightContent() {
 					</NextLink>
 
 					<Tooltip content={<UserOptions />}>
-						<picture className="profile-photo">
-							<Avatar src={user.user?.image || ''} alt={user.user?.name || ''} />
-						</picture>
+						<Avatar src={user.user?.image || ''} alt={user.user?.name || ''} size="md" />
 					</Tooltip>
 				</>
 			) : (

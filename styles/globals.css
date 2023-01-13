@@ -116,6 +116,10 @@ a:visited {
 	aspect-ratio: 1;
 	border-radius: 50%;
 }
+.profile-photo > * {
+	width: 100% !important;
+	height: 100% !important;
+}
 .text-sm {
 	font-size: 0.85rem;
 }
