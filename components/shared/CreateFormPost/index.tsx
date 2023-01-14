@@ -1,8 +1,8 @@
-import NextLink from 'next/link'
 import Avatar from 'components/Avatar'
 import { useUser } from 'hooks/useUser'
 
 import styles from './styles.module.css'
+import Button from '../Button'
 
 export default function CreateFormPost() {
 	const { user } = useUser()
@@ -20,9 +20,7 @@ export default function CreateFormPost() {
 				autoComplete="off"
 			/>
 			<div className={styles.button}>
-				<NextLink href="/share">
-					<a className="btn primary">Crear</a>
-				</NextLink>
+				<Button to="/share">Crear</Button>
 			</div>
 		</label>
 	)

@@ -32,6 +32,14 @@
 	&[data-color='info'] {
 		--loader-color: var(--color-info);
 	}
+
+	&[data-color='light'] {
+		--loader-color: var(--color-light);
+	}
+
+	&[data-color='dark'] {
+		--loader-color: var(--color-dark);
+	}
 }
 
 @keyframes rotation {

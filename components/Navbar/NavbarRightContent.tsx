@@ -1,11 +1,11 @@
 import { ChangeEvent } from 'react'
-import NextLink from 'next/link'
 
 import Tooltip from 'components/Tooltip'
 import Avatar from 'components/Avatar'
 
 //utils
 import { useUser } from 'hooks/useUser'
+import Button from 'components/shared/Button'
 
 export default function NavbarRightContent() {
 	const { user } = useUser()
@@ -35,18 +35,14 @@ export default function NavbarRightContent() {
 			</label>
 			{user ? (
 				<>
-					<NextLink href="/share">
-						<a className="btn primary">Crear</a>
-					</NextLink>
+					<Button to="/share">Crear</Button>
 
 					<Tooltip content={<UserOptions />}>
 						<Avatar src={user.user?.image || ''} alt={user.user?.name || ''} size="md" />
 					</Tooltip>
 				</>
 			) : (
-				<NextLink href="/login">
-					<a className="btn primary">Login </a>
-				</NextLink>
+				<Button to="/login">Login</Button>
 			)}
 		</>
 	)
@@ -57,10 +53,8 @@ function UserOptions() {
 	return (
 		<>
 			<div className="container">
-				<button className="btn">Settings</button>
-				<button onClick={() => signOut()} className="btn primary">
-					Loggout
-				</button>
+				<Button color="secondary">Settings</Button>
+				<Button onClick={() => signOut()}>Loggout</Button>
 			</div>
 			<style jsx>{`
 				.container {

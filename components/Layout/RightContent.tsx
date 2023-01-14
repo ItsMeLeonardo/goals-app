@@ -1,4 +1,5 @@
 import Avatar from 'components/Avatar'
+import Button from 'components/shared/Button'
 
 export default function RightContent() {
 	return (
@@ -50,8 +51,8 @@ export default function RightContent() {
 						</div>
 					</div>
 					<div className="friend-request-action">
-						<button className="btn primary">Accept</button>
-						<button className="btn">Decline</button>
+						<Button>Accept</Button>
+						<Button color="secondary">Decline</Button>
 					</div>
 				</div>
 			</div>
