@@ -7,11 +7,12 @@ type Props = {
 	h?: number | string
 	onLoadImage?: (file: File) => void
 	clear?: boolean
+	thumbnail?: string
 }
 
-export default function FormImageInput(
-	{ w, h, onLoadImage, clear }: Props = { w: '100%', h: '100%' }
-) {
+export default function FormImageInput(props: Props) {
+	const { w = '100%', h = '100%', onLoadImage, clear, thumbnail } = props
+
 	const [fileUrl, setFileUrl] = useState('')
 	const [error, setError] = useState<boolean>(false)
 
@@ -53,13 +54,13 @@ export default function FormImageInput(
 		<label className={Form.fileInputLabel}>
 			<input type="file" className={Form.fileInput} accept="image/*" onChange={loadFile} />
 			<picture className={Form.image_container} style={{ width: w, height: h }}>
-				{fileUrl.length === 0 ? (
+				{fileUrl.length === 0 && !thumbnail ? (
 					<div className={Form.image_placeholder}>
 						<span>{infoMessage}</span>
 						<i className={`${Form.image_placeholder_icon} uil uil-image-plus`}></i>
 					</div>
 				) : (
-					<img src={fileUrl} alt="thumbnail" onError={onErrorLoad} />
+					<img src={thumbnail || fileUrl} alt="thumbnail" onError={onErrorLoad} />
 				)}
 			</picture>
 		</label>

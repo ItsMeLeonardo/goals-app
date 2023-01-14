@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { FormEvent } from 'react'
+
 import { useShare } from 'components/Pages/Share/hooks/useShare'
 import { useUser } from 'hooks/useUser'
 
@@ -19,14 +20,17 @@ import style from './formShare.module.css'
 import type { PostDto } from 'controllers/posts/dto'
 import type { Post } from 'models/post'
 import type { Tag } from 'models/tag'
+import { getUrlMetadata } from 'services/post/url'
 
 type FormStatus = 'default' | 'loading' | 'error' | 'success'
 
 export default function FormShare() {
 	const { formState, setImage, setTitle, setUrl, reset } = useShare()
+	const { user } = useUser()
+
+	const [thumbnail, setThumbnail] = useState<string | undefined>()
 	const [firstFormView, setFirstFormView] = useState(true)
 	const [formStatus, setFormStatus] = useState<FormStatus>('default')
-	const { user } = useUser()
 	const [postSaved, setPostSaved] = useState<Post | null>(null)
 
 	const { title, url } = formState
@@ -63,7 +67,14 @@ export default function FormShare() {
 	const handleChangeUrl = (event: FormEvent<HTMLInputElement>) => {
 		const { value } = event.currentTarget
 		const url = value.trim()
+
 		setUrl(url)
+
+		getUrlMetadata(url).then(({ title, image }) => {
+			setTitle(title)
+			setThumbnail(image)
+			setImage(image)
+		})
 	}
 
 	const handleChangeTitle = (event: FormEvent<HTMLInputElement>) => {
@@ -110,6 +121,7 @@ export default function FormShare() {
 						<FormGroup>
 							<FormImageInput
 								h={'240px'}
+								thumbnail={thumbnail}
 								onLoadImage={handleChangeImage}
 								clear={formStatus === 'success'}
 							/>

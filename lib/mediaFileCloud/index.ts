@@ -34,14 +34,22 @@ export async function uploadImage(
 ): Promise<[mediaType | null, string | null]> {
 	try {
 		const imageOptions = { folder: process.env.CLOUDINARY_FOLDER }
-		const { public_id: name, secure_url: url } = await uploadStream(
-			file.buffer,
-			imageOptions
-		).catch()
+		const { public_id: name, secure_url: url } = await uploadStream(file.buffer, imageOptions)
 
 		return [{ url, name }, null]
 	} catch (error) {
 		// console.error({ error });
 		return [null, 'Error cargando la imagen']
+	}
+}
+
+export async function uploadFromUrl(url: string) {
+	try {
+		const result = await cloudinary.uploader.upload(url, {
+			folder: process.env.CLOUDINARY_FOLDER,
+		})
+		return result
+	} catch (error) {
+		return null
 	}
 }

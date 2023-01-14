@@ -1,6 +1,6 @@
-import type { NextApiRequest } from "next";
+import type { NextApiRequest } from 'next'
 
 export type FileRequest = NextApiRequest & {
-  file: Express.Multer.File;
-  image?: string;
-};
+	file?: Express.Multer.File
+	image?: string
+}
