@@ -8,6 +8,7 @@ import { search } from 'services/post'
 import { Post } from 'models/post'
 
 import styles from './Explore.module.css'
+import Loader from 'components/shared/Loader'
 
 const categories = [
 	{
@@ -62,7 +63,11 @@ export default function Explore() {
 						placeholder="¿Qué quieres aprender hoy?"
 						onChange={debouncedSearchPost}
 					/>
-					{loading && <div className={styles.loader} />}
+					{loading && (
+						<div className={styles.loader}>
+							<Loader size={32} />
+						</div>
+					)}
 				</div>
 				<ul className={styles.category_list}>
 					{categories.map(({ value, name }) => (

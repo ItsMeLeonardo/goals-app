@@ -1,0 +1,44 @@
+.loader {
+	--loader-size: 2rem;
+	width: var(--loader-size);
+	height: var(--loader-size);
+	border-radius: 50%;
+	display: inline-block;
+	border-top: 3px solid var(--loader-color);
+	border-right: 3px solid transparent;
+	box-sizing: border-box;
+	animation: rotation 0.75s linear infinite;
+
+	&[data-color='primary'] {
+		--loader-color: var(--color-primary);
+	}
+
+	&[data-color='secondary'] {
+		--loader-color: var(--color-secondary);
+	}
+
+	&[data-color='success'] {
+		--loader-color: var(--color-success);
+	}
+
+	&[data-color='danger'] {
+		--loader-color: var(--color-danger);
+	}
+
+	&[data-color='warning'] {
+		--loader-color: var(--color-warning);
+	}
+
+	&[data-color='info'] {
+		--loader-color: var(--color-info);
+	}
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

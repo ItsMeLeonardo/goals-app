@@ -42,26 +42,10 @@
 	.loader {
 		position: absolute;
 		right: 1rem;
-	}
-}
-
-.loader {
-	--size: 2rem;
-	width: var(--size);
-	height: var(--size);
-	border-radius: 50%;
-	display: inline-block;
-	border-top: 3px solid var(--color-primary);
-	border-right: 3px solid transparent;
-	box-sizing: border-box;
-	animation: rotation 0.75s linear infinite;
-}
-
-@keyframes rotation {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
+		width: 2rem;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 }
