@@ -69,7 +69,6 @@ body[data-theme='dark'] {
 :focus {
 	outline: 2px solid var(--color-primary);
 	outline-offset: 0.25rem;
-	border-radius: 0.25rem;
 }
 
 .font-i {
