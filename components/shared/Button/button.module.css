@@ -92,4 +92,12 @@
 
 .label {
 	flex-grow: 1;
+
+	&[data-icon='true'] {
+		padding-right: 1rem;
+	}
+
+	&[data-icon-right='true'] {
+		padding-left: 1rem;
+	}
 }

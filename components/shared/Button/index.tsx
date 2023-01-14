@@ -34,22 +34,29 @@ export default function Button(props: Props) {
 		...buttonProps
 	} = props
 
+	const genericProps = {
+		'data-color': color,
+		'data-border': border,
+		className: button.btn,
+		'data-disabled': disabled,
+		'data-full-width': fullWidth,
+	}
+
+	const child = (
+		<>
+			{icon && <span className={button.icon}>{icon}</span>}
+			<span className={button.label} data-icon={!!icon} data-icon-right={!!iconRight}>
+				{children}
+			</span>
+			{loading && <Loader color="light" size={24} />}
+			{iconRight && <span className={button.iconRight}>{iconRight}</span>}
+		</>
+	)
+
 	if (href) {
 		return (
-			<a
-				href={href}
-				target="_blank"
-				rel="noreferrer"
-				data-color={color}
-				data-border={border}
-				className={button.btn}
-				data-disabled={disabled}
-				data-full-width={fullWidth}
-			>
-				{icon && <span className={button.icon}>{icon}</span>}
-				<span className={button.label}>{children}</span>
-				{loading && <Loader color="light" size={24} />}
-				{iconRight && <span className={button.iconRight}>{iconRight}</span>}
+			<a href={href} target="_blank" rel="noreferrer" {...genericProps}>
+				{child}
 			</a>
 		)
 	}
@@ -57,36 +64,14 @@ export default function Button(props: Props) {
 	if (to) {
 		return (
 			<NextLink href={to}>
-				<a
-					data-color={color}
-					data-border={border}
-					className={button.btn}
-					data-disabled={disabled}
-					data-full-width={fullWidth}
-				>
-					{icon && <span className={button.icon}>{icon}</span>}
-					<span className={button.label}>{children}</span>
-					{loading && <Loader color="light" size={24} />}
-					{iconRight && <span className={button.iconRight}>{iconRight}</span>}
-				</a>
+				<a {...genericProps}>{child}</a>
 			</NextLink>
 		)
 	}
 
 	return (
-		<button
-			type={type}
-			data-color={color}
-			data-border={border}
-			className={button.btn}
-			disabled={disabled}
-			data-full-width={fullWidth}
-			{...buttonProps}
-		>
-			{icon && <span className={button.icon}>{icon}</span>}
-			<span className={button.label}>{children}</span>
-			{loading && <Loader color="light" size={24} />}
-			{iconRight && <span className={button.iconRight}>{iconRight}</span>}
+		<button type={type} {...genericProps} {...buttonProps}>
+			{child}
 		</button>
 	)
 }
