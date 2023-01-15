@@ -3,7 +3,7 @@ module.exports = {
 		'postcss-nested': {},
 		autoprefixer: {},
 		'postcss-color-mod-function': {
-			importFrom: './src/styles/global.css',
+			importFrom: './styles/globals.css',
 		},
 	},
 }
