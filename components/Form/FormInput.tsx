@@ -44,7 +44,7 @@ export default function FormInput(props: props) {
 					offset={[0, 0]}
 				>
 					<span className={Form.input_help_icons}>
-						<ErrorIcon />
+						<QuestionIcon />
 					</span>
 				</Tippy>
 			)}
