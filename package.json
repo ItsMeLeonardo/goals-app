@@ -14,6 +14,7 @@
     "axios": "0.27.2",
     "chart.js": "3.8.0",
     "cloudinary": "1.30.0",
+    "cookies-next": "2.1.1",
     "luxon": "3.2.1",
     "mongoose": "6.3.4",
     "multer": "1.4.5-lts.1",

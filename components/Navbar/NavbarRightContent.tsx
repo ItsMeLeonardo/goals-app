@@ -1,4 +1,5 @@
-import { ChangeEvent } from 'react'
+import SunIcon from 'remixicon-react/SunLineIcon'
+import MoonIcon from 'remixicon-react/MoonLineIcon'
 
 import Tooltip from 'components/Tooltip'
 import Avatar from 'components/Avatar'
@@ -6,33 +7,17 @@ import Avatar from 'components/Avatar'
 //utils
 import { useUser } from 'hooks/useUser'
 import Button from 'components/shared/Button'
+import { useTheme } from 'context/Theme'
 
 export default function NavbarRightContent() {
 	const { user } = useUser()
-
-	const toggleTheme = (event: ChangeEvent<HTMLInputElement>) => {
-		const checked = event.target.checked
-		if (checked) {
-			document.body.setAttribute('data-theme', 'dark')
-		} else {
-			document.body.setAttribute('data-theme', 'light')
-		}
-	}
+	const { toggleTheme, theme } = useTheme()
 
 	return (
 		<>
-			<label className="theme-btn">
-				<input
-					onChange={toggleTheme}
-					type="checkbox"
-					name="theme"
-					id="theme-checkbox"
-					className="theme-checkbox"
-					hidden
-				/>
-				<i className="uil uil-sun light-theme-icon"></i>
-				<i className="uil uil-moon dark-theme-icon"></i>
-			</label>
+			<button className="theme-btn" onClick={toggleTheme}>
+				{theme === 'light' ? <SunIcon size={24} /> : <MoonIcon size={24} />}
+			</button>
 			{user ? (
 				<>
 					<Button to="/share">Crear</Button>
