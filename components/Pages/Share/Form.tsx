@@ -26,15 +26,15 @@ import type { PostDto } from 'controllers/posts/dto'
 import type { Post } from 'models/post'
 import type { Tag } from 'models/tag'
 import { getUrlMetadata } from 'services/post/url'
-
-type FormStatus = 'default' | 'loading' | 'error' | 'success'
+import Loader from 'components/shared/Loader'
 
 export default function FormShare() {
 	const { formState, setImage, setTitle, setUrl, reset, removeImage } = useShare()
 	const { user } = useUser()
 
 	const [thumbnail, setThumbnail] = useState<string | undefined>()
-	const [formStatus, setFormStatus] = useState<FormStatus>('default')
+	const [isSaving, setIsSaving] = useState(false)
+	const [isGettingUrlData, setIsGettingUrlData] = useState(false)
 	const [postSaved, setPostSaved] = useState<Post | null>(null)
 
 	const { title, url } = formState
@@ -42,6 +42,7 @@ export default function FormShare() {
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
 
+		const form = event.target as HTMLFormElement
 		if (!user) return
 		const id = user.userId as string
 
@@ -56,29 +57,35 @@ export default function FormShare() {
 
 		if (!formState.image) return
 
-		setFormStatus('loading')
+		setIsSaving(true)
 
-		create(postBody, formState.image).then((data) => {
-			reset()
-			setFormStatus('success')
-			setThumbnail(undefined)
+		create(postBody, formState.image)
+			.then((data) => {
+				reset()
+				setThumbnail(undefined)
 
-			setTimeout(() => {
-				setFormStatus('default')
-			}, 3000)
-			setPostSaved(data)
-		})
+				setPostSaved(data)
+				form.reset()
+			})
+			.finally(() => {
+				setIsSaving(false)
+			})
 	}
 
 	const setDataFromUrl = (url: string) => {
 		const validUrl = urlValidator(url)
 		if (!validUrl) return
-		getUrlMetadata(url).then(({ title, image }) => {
-			setTitle(title)
-			if (!image) return
-			setThumbnail(image)
-			setImage(image)
-		})
+		setIsGettingUrlData(true)
+		getUrlMetadata(url)
+			.then(({ title, image }) => {
+				setTitle(title)
+				if (!image) return
+				setThumbnail(image)
+				setImage(image)
+			})
+			.finally(() => {
+				setIsGettingUrlData(false)
+			})
 	}
 
 	const debouncedSetDataFromUrl = debounce(500, setDataFromUrl)
@@ -104,6 +111,8 @@ export default function FormShare() {
 		setThumbnail(undefined)
 	}
 
+	const isLoading = isGettingUrlData || isSaving
+
 	return (
 		<>
 			<section>
@@ -115,7 +124,9 @@ export default function FormShare() {
 						placeholder="Copia el Link del recurso"
 						onInput={handleChangeUrl}
 						required
-						helperText="Puedes compartir un link de youtube, vimeo, etc."
+						helperText="Pega el link y se completaran los campos"
+						disabled={isLoading}
+						loading={isGettingUrlData}
 					/>
 					<aside className={style.form_share}>
 						<FormGroup>
@@ -125,24 +136,33 @@ export default function FormShare() {
 								placeholder="Titulo del recurso"
 								onInput={handleChangeTitle}
 								required
+								disabled={isSaving}
+								loading={isGettingUrlData}
 								value={title}
 							/>
 
-							<AutocompleteTag />
+							<AutocompleteTag disabled={isLoading} />
 						</FormGroup>
 						<FormGroup>
 							<FormImageInput
 								h={'240px'}
 								thumbnail={thumbnail}
 								onLoadImage={handleLoadImage}
-								clear={formStatus === 'success'}
+								disabled={isLoading}
 								onRemoveImage={removeFormImage}
+								loading={isGettingUrlData}
 							/>
 						</FormGroup>
 					</aside>
 					<div className={style.form_submit_container}>
-						<button className={style.form_submit} disabled={formStatus === 'loading'}>
-							Crear
+						<button className={style.form_submit} disabled={isLoading}>
+							{isSaving ? (
+								<Loader color="light" size={13} />
+							) : isGettingUrlData ? (
+								'Obteniendo datos'
+							) : (
+								'Compartir'
+							)}
 						</button>
 					</div>
 				</form>

@@ -2,6 +2,7 @@ import { useState, ChangeEvent, useEffect } from 'react'
 import CloseIcon from 'remixicon-react/CloseLineIcon'
 
 import Form from './form.module.css'
+import Loader from 'components/shared/Loader'
 
 type Props = {
 	w?: number | string
@@ -10,10 +11,21 @@ type Props = {
 	thumbnail?: string
 	onLoadImage?: (file: File) => void
 	onRemoveImage?: () => void
+	disabled?: boolean
+	loading?: boolean
 }
 
 export default function FormImageInput(props: Props) {
-	const { w = '100%', h = '100%', onLoadImage, clear, thumbnail, onRemoveImage } = props
+	const {
+		w = '100%',
+		h = '100%',
+		onLoadImage,
+		clear,
+		thumbnail,
+		onRemoveImage,
+		disabled,
+		loading,
+	} = props
 
 	const [fileUrl, setFileUrl] = useState('')
 	const [error, setError] = useState(false)
@@ -61,8 +73,14 @@ export default function FormImageInput(props: Props) {
 
 	const thereIsPreview = fileUrl.length > 0 || thumbnail
 	return (
-		<label className={Form.fileInputLabel}>
-			<input type="file" className={Form.fileInput} accept="image/*" onChange={loadFile} />
+		<label className={Form.fileInputLabel} data-disabled={disabled || loading}>
+			<input
+				type="file"
+				className={Form.fileInput}
+				accept="image/*"
+				onChange={loadFile}
+				disabled={disabled || loading}
+			/>
 			<picture className={Form.image_container} style={{ width: w, height: h }}>
 				{thereIsPreview && (
 					<button className={Form.image_close} type="button" onClick={onClear}>
@@ -76,6 +94,11 @@ export default function FormImageInput(props: Props) {
 					<div className={Form.image_placeholder}>
 						<span>{infoMessage}</span>
 						<i className={`${Form.image_placeholder_icon} uil uil-image-plus`}></i>
+					</div>
+				)}
+				{loading && (
+					<div className={Form.image_loader}>
+						<Loader size={60} />
 					</div>
 				)}
 			</picture>

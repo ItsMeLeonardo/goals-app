@@ -38,7 +38,11 @@ const handler = (query: string, done: (results: AutocompleteItem[]) => void) => 
 
 const debouncedSearched = debounce(500, handler)
 
-export default function Autocomplete() {
+type Props = {
+	disabled?: boolean
+}
+
+export default function Autocomplete({ disabled }: Props) {
 	const [inputValue, setInputValue] = useState('')
 	const [searchLoading, setSearchLoading] = useState(false)
 	const { formState, setTags } = useShare()
@@ -100,6 +104,7 @@ export default function Autocomplete() {
 				onChange={handleInputChange}
 				value={inputValue}
 				icon={<SearchIcon size="16" />}
+				disabled={disabled}
 			/>
 			{inputValue.length > 0 && (
 				<AutocompleteResults
