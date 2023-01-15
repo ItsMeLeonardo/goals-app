@@ -27,7 +27,13 @@ export default function AutocompleteResults(props: AutocompleteResultsProps) {
 	return (
 		<ul className={style.list}>
 			{results.map((item) => (
-				<button className={style.item} key={item.id} role="button" onClick={() => onSelect(item)}>
+				<button
+					type="button"
+					className={style.item}
+					key={item.id}
+					role="button"
+					onClick={() => onSelect(item)}
+				>
 					<span>{item.name}</span>
 					<span className={`${style.icon_check} ${item.isSelected && style.icon_check_active}`}>
 						<i className="uil uil-check"></i>
