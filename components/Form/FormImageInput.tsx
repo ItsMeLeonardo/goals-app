@@ -1,20 +1,22 @@
 import { useState, ChangeEvent, useEffect } from 'react'
+import CloseIcon from 'remixicon-react/CloseLineIcon'
 
 import Form from './form.module.css'
 
 type Props = {
 	w?: number | string
 	h?: number | string
-	onLoadImage?: (file: File) => void
 	clear?: boolean
 	thumbnail?: string
+	onLoadImage?: (file: File) => void
+	onRemoveImage?: () => void
 }
 
 export default function FormImageInput(props: Props) {
-	const { w = '100%', h = '100%', onLoadImage, clear, thumbnail } = props
+	const { w = '100%', h = '100%', onLoadImage, clear, thumbnail, onRemoveImage } = props
 
 	const [fileUrl, setFileUrl] = useState('')
-	const [error, setError] = useState<boolean>(false)
+	const [error, setError] = useState(false)
 
 	useEffect(() => {
 		if (clear) {
@@ -46,21 +48,35 @@ export default function FormImageInput(props: Props) {
 		setError(true)
 	}
 
+	const onClear = () => {
+		setFileUrl('')
+		setError(false)
+
+		if (onRemoveImage) onRemoveImage()
+	}
+
 	const infoMessage = error
 		? 'Ocurrió un error al subir la imagen, vuelve a intentarlo'
 		: 'Sube una imagen para el recurso'
 
+	const thereIsPreview = fileUrl.length > 0 || thumbnail
 	return (
 		<label className={Form.fileInputLabel}>
 			<input type="file" className={Form.fileInput} accept="image/*" onChange={loadFile} />
 			<picture className={Form.image_container} style={{ width: w, height: h }}>
-				{fileUrl.length === 0 && !thumbnail ? (
+				{thereIsPreview && (
+					<button className={Form.image_close} type="button" onClick={onClear}>
+						<CloseIcon />
+					</button>
+				)}
+
+				{thereIsPreview ? (
+					<img src={thumbnail || fileUrl} alt="thumbnail" onError={onErrorLoad} />
+				) : (
 					<div className={Form.image_placeholder}>
 						<span>{infoMessage}</span>
 						<i className={`${Form.image_placeholder_icon} uil uil-image-plus`}></i>
 					</div>
-				) : (
-					<img src={thumbnail || fileUrl} alt="thumbnail" onError={onErrorLoad} />
 				)}
 			</picture>
 		</label>

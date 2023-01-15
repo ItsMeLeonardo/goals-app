@@ -25,7 +25,7 @@ import { getUrlMetadata } from 'services/post/url'
 type FormStatus = 'default' | 'loading' | 'error' | 'success'
 
 export default function FormShare() {
-	const { formState, setImage, setTitle, setUrl, reset } = useShare()
+	const { formState, setImage, setTitle, setUrl, reset, removeImage } = useShare()
 	const { user } = useUser()
 
 	const [thumbnail, setThumbnail] = useState<string | undefined>()
@@ -53,9 +53,12 @@ export default function FormShare() {
 
 		if (!formState.image) return
 
+		setFormStatus('loading')
+
 		create(postBody, formState.image).then((data) => {
 			reset()
 			setFormStatus('success')
+			setThumbnail(undefined)
 
 			setTimeout(() => {
 				setFormStatus('default')
@@ -72,6 +75,7 @@ export default function FormShare() {
 
 		getUrlMetadata(url).then(({ title, image }) => {
 			setTitle(title)
+			if (!image) return
 			setThumbnail(image)
 			setImage(image)
 		})
@@ -81,8 +85,13 @@ export default function FormShare() {
 		setTitle(event.currentTarget.value)
 	}
 
-	const handleChangeImage = (file: File) => {
+	const handleLoadImage = (file: File) => {
 		setImage(file)
+	}
+
+	const removeFormImage = () => {
+		removeImage()
+		setThumbnail(undefined)
 	}
 
 	//error messages
@@ -122,8 +131,9 @@ export default function FormShare() {
 							<FormImageInput
 								h={'240px'}
 								thumbnail={thumbnail}
-								onLoadImage={handleChangeImage}
+								onLoadImage={handleLoadImage}
 								clear={formStatus === 'success'}
+								onRemoveImage={removeFormImage}
 							/>
 						</FormGroup>
 					</aside>

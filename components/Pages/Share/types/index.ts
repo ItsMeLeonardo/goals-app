@@ -15,6 +15,7 @@ export type FormShareContextType = {
 	setTags: (tags: AutocompleteItem[]) => void
 	setImage: (image: File | string) => void
 	reset: () => void
+	removeImage: () => void
 }
 
 export type ProviderProps = {
@@ -27,6 +28,7 @@ export enum ActionKind {
 	setTitle = 'SET_TITLE',
 	setTags = 'SET_TAGS',
 	setImage = 'SET_IMAGE',
+	removeImage = 'REMOVE_IMAGE',
 	reset = 'RESET',
 }
 
@@ -37,5 +39,5 @@ export type Action = {
 
 export type FileAction = {
 	type: ActionKind.setImage
-	payload: File
+	payload: File | string
 }

@@ -24,6 +24,7 @@ const initialValue: FormShareContextType = {
 	setUrl: () => {},
 	setTags: () => {},
 	reset: () => {},
+	removeImage: () => {},
 }
 
 export const FormShareContext = createContext<FormShareContextType>(initialValue)
@@ -49,6 +50,9 @@ const formReducer = (state: FormShare, action: Action | FileAction): FormShare =
 			return state
 		case ActionKind.setImage:
 			return { ...state, image: payload }
+
+		case ActionKind.removeImage:
+			return { ...state, image: undefined }
 		case ActionKind.reset:
 			return initialState
 	}
@@ -68,8 +72,12 @@ export function FormShareProvider({ children }: ProviderProps) {
 		dispatch({ type: ActionKind.setTags, payload: tags })
 	}
 
-	const setImage = (image: File) => {
+	const setImage = (image: File | string) => {
 		dispatch({ type: ActionKind.setImage, payload: image })
+	}
+
+	const removeImage = () => {
+		dispatch({ type: ActionKind.removeImage, payload: '' })
 	}
 
 	const reset = () => {
@@ -83,6 +91,7 @@ export function FormShareProvider({ children }: ProviderProps) {
 		setTags,
 		setImage,
 		reset,
+		removeImage,
 	}
 
 	return <FormShareContext.Provider value={value}>{children}</FormShareContext.Provider>
