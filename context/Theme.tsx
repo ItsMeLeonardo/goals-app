@@ -24,7 +24,6 @@ export default function ThemeProvider({ children, theme }: ProviderProps) {
 	const [userTheme, setUserTheme] = useState(theme)
 
 	useEffect(() => {
-		console.log({ userTheme, theme })
 		document.body.setAttribute(COOKIE_THEME_KEY, userTheme)
 	}, [userTheme, theme])
 
