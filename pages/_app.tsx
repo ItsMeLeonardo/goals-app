@@ -1,3 +1,4 @@
+import 'tippy.js/dist/tippy.css'
 import { SWRConfig, SWRConfiguration } from 'swr'
 
 import type { AppProps } from 'next/app'
@@ -22,6 +23,7 @@ type Props = {
 
 //styles
 import '../styles/globals.css'
+import 'tippy.js/dist/tippy.css'
 
 //swr config
 const config: SWRConfiguration = {

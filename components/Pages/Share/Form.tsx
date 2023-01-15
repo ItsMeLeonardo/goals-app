@@ -1,6 +1,8 @@
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
+import { debounce } from 'throttle-debounce'
 import type { FormEvent } from 'react'
 
+import { urlValidator } from 'utils/validators'
 import { useShare } from 'components/Pages/Share/hooks/useShare'
 import { useUser } from 'hooks/useUser'
 
@@ -9,6 +11,9 @@ import FormGroup from 'components/Form/FormGroup'
 import FormInput from 'components/Form/FormInput'
 import FormImageInput from 'components/Form/FormImageInput'
 import PostComponent from 'components/Post'
+
+import LinkIcon from 'remixicon-react/LinkIcon'
+import TitleIcon from 'remixicon-react/HeadingIcon'
 
 //services
 import { create } from 'services/post'
@@ -29,7 +34,6 @@ export default function FormShare() {
 	const { user } = useUser()
 
 	const [thumbnail, setThumbnail] = useState<string | undefined>()
-	const [firstFormView, setFirstFormView] = useState(true)
 	const [formStatus, setFormStatus] = useState<FormStatus>('default')
 	const [postSaved, setPostSaved] = useState<Post | null>(null)
 
@@ -37,7 +41,6 @@ export default function FormShare() {
 
 	const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault()
-		setFirstFormView(false)
 
 		if (!user) return
 		const id = user.userId as string
@@ -67,18 +70,25 @@ export default function FormShare() {
 		})
 	}
 
-	const handleChangeUrl = (event: FormEvent<HTMLInputElement>) => {
-		const { value } = event.currentTarget
-		const url = value.trim()
-
-		setUrl(url)
-
+	const setDataFromUrl = (url: string) => {
+		const validUrl = urlValidator(url)
+		if (!validUrl) return
 		getUrlMetadata(url).then(({ title, image }) => {
 			setTitle(title)
 			if (!image) return
 			setThumbnail(image)
 			setImage(image)
 		})
+	}
+
+	const debouncedSetDataFromUrl = debounce(500, setDataFromUrl)
+
+	const handleChangeUrl = (event: ChangeEvent<HTMLInputElement>) => {
+		const { value } = event.target
+		const url = value.trim()
+
+		setUrl(url)
+		debouncedSetDataFromUrl(url)
 	}
 
 	const handleChangeTitle = (event: FormEvent<HTMLInputElement>) => {
@@ -94,11 +104,6 @@ export default function FormShare() {
 		setThumbnail(undefined)
 	}
 
-	//error messages
-	const urlErrorMessage = url.length === 0 && !firstFormView ? 'El link es requerido' : undefined
-	const titleErrorMessage =
-		title.length === 0 && !firstFormView ? 'El titulo es requerido' : undefined
-
 	return (
 		<>
 			<section>
@@ -106,23 +111,21 @@ export default function FormShare() {
 				<form className={style.share_container} onSubmit={handleSubmit}>
 					<FormInput
 						type="url"
-						icon={<i className="uil uil-link field-icon"></i>}
-						placeholder="Link del recurso"
+						icon={<LinkIcon size="16" />}
+						placeholder="Copia el Link del recurso"
 						onInput={handleChangeUrl}
 						required
-						value={url}
-						error={urlErrorMessage}
+						helperText="Puedes compartir un link de youtube, vimeo, etc."
 					/>
 					<aside className={style.form_share}>
 						<FormGroup>
 							<FormInput
 								type="text"
-								icon={<i className="uil uil-text "></i>}
+								icon={<TitleIcon size="16" />}
 								placeholder="Titulo del recurso"
 								onInput={handleChangeTitle}
 								required
 								value={title}
-								error={titleErrorMessage}
 							/>
 
 							<AutocompleteTag />
@@ -138,7 +141,9 @@ export default function FormShare() {
 						</FormGroup>
 					</aside>
 					<div className={style.form_submit_container}>
-						<button className={style.form_submit}>Crear</button>
+						<button className={style.form_submit} disabled={formStatus === 'loading'}>
+							Crear
+						</button>
 					</div>
 				</form>
 			</section>

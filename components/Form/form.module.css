@@ -8,6 +8,10 @@
 	padding: 0.5rem;
 	border-radius: calc(var(--card-radius) / 2);
 	background: var(--color-light);
+
+	&[data-error='true'] {
+		border: 2px solid var(--color-danger);
+	}
 }
 .group {
 	position: relative;
@@ -96,15 +100,30 @@
 	height: 100%;
 }
 /* ====ERRORS ==== */
-.error_message {
+.input_help_icons {
 	position: absolute;
 	font-size: 12px;
-	padding: 0 0.5rem;
-	top: -0.5rem;
-	color: var(--color-danger);
-	left: 1rem;
-	background: linear-gradient(0deg, var(--color-light), var(--color-white));
+	top: 0;
+	right: 0;
+	height: 100%;
+	aspect-ratio: 1/1;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: help;
+	color: var(--color-info);
+
+	&[data-error='true'] {
+		color: var(--color-danger);
+	}
 }
-.input_error:focus {
-	outline-color: var(--color-danger);
+.helper_tooltip {
+	background: var(--color-info);
+}
+.error_message {
+	/* padding: 0.5rem; */
+	color: white;
+}
+.error_tooltip {
+	background: var(--color-danger);
 }
