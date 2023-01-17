@@ -1,17 +1,17 @@
-import { ReactNode } from "react";
-
+import { ReactNode } from 'react'
+import styles from './mainLayout.module.css'
 interface Props {
-  children: ReactNode;
+	children: ReactNode
 }
 
 //components
-import Navbar from "components/Navbar";
+import Navbar from 'components/Navbar'
 
 export default function Layout({ children }: Props) {
-  return (
-    <section>
-      <Navbar />
-      <main className="container">{children}</main>
-    </section>
-  );
+	return (
+		<section>
+			<Navbar />
+			<main className={styles.container}>{children}</main>
+		</section>
+	)
 }
