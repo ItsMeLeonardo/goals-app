@@ -1,23 +1,24 @@
-import NextLink from "next/link";
+import NextLink from 'next/link'
 
-import NavbarRightContent from "components/Navbar/NavbarRightContent";
-import SearchBar from "components/Navbar/SearchBar";
+import NavbarRightContent from 'components/Navbar/NavbarRightContent'
+import SearchBar from 'components/Navbar/SearchBar'
+
+import styles from './style.module.css'
 
 export default function Layout() {
-  return (
-    <nav className="navbar">
-      <div className="container">
-        <NextLink href="/">
-          <a>
-            <h2 className="logo">Juntos_</h2>
-          </a>
-        </NextLink>
-        <SearchBar />
+	return (
+		<nav className="navbar">
+			<div className={styles.container}>
+				<NextLink href="/">
+					<a>
+						<h2 className={styles.logo}>Juntos_</h2>
+						<h2 className={styles.logoMobile}>J_</h2>
+					</a>
+				</NextLink>
+				<SearchBar />
 
-        <div className="create">
-          <NavbarRightContent />
-        </div>
-      </div>
-    </nav>
-  );
+				<NavbarRightContent />
+			</div>
+		</nav>
+	)
 }

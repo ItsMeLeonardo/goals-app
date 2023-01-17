@@ -32,6 +32,7 @@
 	/* --sticky-top-right: -18rem; */
 
 	--navbar-height: 70px;
+	--page-max-width: 1440px;
 }
 
 *,
@@ -110,7 +111,7 @@ a:visited {
 
 .container {
 	width: 90%;
-	max-width: 1400px;
+	max-width: var(--page-max-width);
 	margin: 0 auto;
 }
 .profile-photo {
@@ -241,7 +242,7 @@ main {
 	position: relative;
 	top: 5.4rem;
 	width: 90%;
-	max-width: 1400px;
+	max-width: var(--page-max-width);
 	margin: 0 auto;
 }
 

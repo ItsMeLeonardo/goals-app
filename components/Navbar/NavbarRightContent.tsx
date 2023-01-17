@@ -9,12 +9,14 @@ import { useUser } from 'hooks/useUser'
 import Button from 'components/shared/Button'
 import { useTheme } from 'context/Theme'
 
+import styles from './style.module.css'
+
 export default function NavbarRightContent() {
 	const { user } = useUser()
 	const { toggleTheme, theme } = useTheme()
 
 	return (
-		<>
+		<div className={styles.navbar_right}>
 			<button className="theme-btn" onClick={toggleTheme}>
 				{theme === 'light' ? <SunIcon size={24} /> : <MoonIcon size={24} />}
 			</button>
@@ -29,7 +31,7 @@ export default function NavbarRightContent() {
 			) : (
 				<Button to="/login">Login</Button>
 			)}
-		</>
+		</div>
 	)
 }
 

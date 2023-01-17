@@ -2,8 +2,11 @@
 	position: relative;
 	width: 100%;
 	max-width: 450px;
-	align-self: center;
-	justify-self: center;
+	display: none;
+
+	@media (min-width: 768px) {
+		display: initial;
+	}
 
 	.icon {
 		position: absolute;
