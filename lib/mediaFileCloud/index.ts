@@ -6,6 +6,8 @@ import {
 	UploadResponseCallback,
 } from 'cloudinary'
 
+import { downloadImage, optimizeImage } from 'lib/media/images'
+
 export type mediaType = {
 	url: string
 	name: string
@@ -17,15 +19,18 @@ cloudinary.config({
 	api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-function uploadStream(
+const IMAGE_OPTIONS: UploadApiOptions = { folder: process.env.CLOUDINARY_FOLDER }
+
+async function uploadStream(
 	buffer: Buffer,
 	config: UploadApiOptions
 ): Promise<UploadApiResponse | UploadApiErrorResponse> {
+	const optimizedImage = await optimizeImage(buffer)
 	return new Promise((resolve, reject) => {
 		const cloudinaryDone: UploadResponseCallback = (error, result) => {
 			return !error && result ? resolve(result) : reject(error)
 		}
-		cloudinary.uploader.upload_stream(config, cloudinaryDone).end(buffer)
+		cloudinary.uploader.upload_stream(config, cloudinaryDone).end(optimizedImage)
 	})
 }
 
@@ -33,8 +38,7 @@ export async function uploadImage(
 	file: Express.Multer.File
 ): Promise<[mediaType | null, string | null]> {
 	try {
-		const imageOptions = { folder: process.env.CLOUDINARY_FOLDER }
-		const { public_id: name, secure_url: url } = await uploadStream(file.buffer, imageOptions)
+		const { public_id: name, secure_url: url } = await uploadStream(file.buffer, IMAGE_OPTIONS)
 
 		return [{ url, name }, null]
 	} catch (error) {
@@ -45,9 +49,10 @@ export async function uploadImage(
 
 export async function uploadFromUrl(url: string) {
 	try {
-		const result = await cloudinary.uploader.upload(url, {
-			folder: process.env.CLOUDINARY_FOLDER,
-		})
+		const buffer = await downloadImage(url)
+
+		const result = await uploadStream(buffer, IMAGE_OPTIONS)
+
 		return result
 	} catch (error) {
 		return null
